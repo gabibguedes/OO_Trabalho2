@@ -14,43 +14,18 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.JButton;
 
-public class MenuInicial extends JFrame{
+public class MenuInicial extends Tela{
 	private JLabel titulo, descricao;
-	private JPanel	contentPane, simulacoes;
-	
-	public static final String TITULO = "Aprenda QEE";
-	public static final String DESCRICAO = "Escolha uma das opções abaixo e faça a sua simulação.";
-	
-	public static final String SIMULACAO1 = "Simular Fluxo de Potência Fundamental";
-	public static final String SIMULACAO2 = "Simular Distorção Harmonica";
-	public static final String SIMULACAO3 = "Simular Fluxo de Potência Harmonico";
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuInicial frame = new MenuInicial();
-					frame.mostrarMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JPanel simulacoes;
+
+	private static final String DESCRICAO = "Escolha uma das opções abaixo e faça a sua simulação.";
 	
 	public MenuInicial() {
 		preparaGUI();
 	}
 	
 	private void preparaGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle(TITULO);
-		setBounds(400, 400, 450, 450);
-		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder (10, 10, 10, 10));
-		setContentPane(contentPane);
+		contentPane.setBorder(new EmptyBorder (40, 40, 40, 40));
 		contentPane.setLayout(new GridLayout(3,1));
 		
 		titulo = new JLabel("", JLabel.LEFT);
@@ -58,9 +33,13 @@ public class MenuInicial extends JFrame{
 		
 		simulacoes = new JPanel();
 		simulacoes.setLayout(new FlowLayout());
+		
+		contentPane.add(titulo);
+		contentPane.add(descricao);
+		contentPane.add(simulacoes);
 	}
 	
-	public void mostrarMenu() {
+	public void mostrarTela() {
 		titulo.setText(TITULO);
 		titulo.setFont(new Font("Dialog", Font.PLAIN, 40));
 		descricao.setText(DESCRICAO);
@@ -86,34 +65,11 @@ public class MenuInicial extends JFrame{
 		simulacao2.addActionListener(new ButtonClickListener());
 		simulacao3.addActionListener(new ButtonClickListener());
 		
-		
 		simulacoes.add(simulacao1);
 		simulacoes.add(simulacao2);
 		simulacoes.add(simulacao3);
 		
-		contentPane.add(titulo);
-		contentPane.add(descricao);
-		contentPane.add(simulacoes);
-	}
-	
-	private class ButtonClickListener implements ActionListener{
-		public void actionPerformed(ActionEvent evento){
-			String comando = evento.getActionCommand();
-			
-			switch (comando) {
-				case SIMULACAO1:
-					System.out.println("Simulação 1: não implementado");
-					break;
-				case SIMULACAO2:
-					System.out.println("Simulação 2: não implementado");
-					break;
-				case SIMULACAO3:
-					System.out.println("Simulação 3: não implementado");
-					break;
-			}
-			
-				
-		}
+		setVisible(true);
 	}
 		
 }
