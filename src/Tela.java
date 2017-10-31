@@ -16,7 +16,7 @@ public class Tela extends JFrame{
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle(TITULO);
-		setBounds(600, 600, 650, 650);
+		setBounds(100, 100, 800, 800);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder (20, 20, 20, 20));

@@ -13,22 +13,34 @@ import javax.swing.border.EmptyBorder;
 
 public class Simulacao extends Tela{
 	protected JLabel titulo;
-	protected JPanel pagina, topoPagina;
+	protected JPanel topoPagina, simulacaoPane, botao;
+	protected JButton voltar;
+	protected String simulacao;
 
 	public Simulacao(){
-		pagina = new JPanel(new GridLayout(2,1));
-		topoPagina = new JPanel(new FlowLayout());
+	}
+	
+	public void preparaSimulacao(String simulacao) {
+		contentPane.setLayout(new BorderLayout(3,1));
 		
-		JButton voltar = new JButton("Voltar");
+		botao = new JPanel(new FlowLayout());
+		simulacaoPane = new JPanel();
+		
+		titulo = new JLabel(simulacao, JLabel.CENTER);
+		titulo.setFont(new Font("Dialog", Font.BOLD, 25));
+		
+		voltar = new JButton("Voltar ao Menu Principal");
 		voltar.setFont(new Font("Dialog", Font.BOLD, 10));
-		voltar.setPreferredSize(new Dimension(55, 30));
+		voltar.setPreferredSize(new Dimension(100, 30));
 		
 		voltar.setActionCommand(MENU);
 		voltar.addActionListener(new ButtonClickListener());
+		botao.add(voltar);
 		
-		topoPagina.add(voltar);
-		pagina.add(topoPagina);
-		contentPane.add(pagina);
+
 		
+		contentPane.add(titulo, BorderLayout.NORTH);
+		contentPane.add(simulacaoPane, BorderLayout.CENTER);
+		contentPane.add(voltar, BorderLayout.SOUTH);
 	}
 }

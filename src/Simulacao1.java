@@ -14,23 +14,24 @@ import javax.swing.border.EmptyBorder;
 public class Simulacao1 extends Simulacao{
 	
 	public Simulacao1() {
+		preparaSimulacao(SIMULACAO1);
 		preparaGUI();
 	}
 	
 	private void preparaGUI() {
-		contentPane.setLayout(new GridLayout(3,1));
-		titulo = new JLabel (SIMULACAO1);
-		titulo.setFont(new Font("Dialog", Font.PLAIN, 20));
+		simulacaoPane.setLayout(new GridLayout(3,1));		
 		
-		Bloco tensao = new Bloco("TENSÃO");
-		Bloco corrente = new Bloco("CORRENTE");
+		Bloco tensao = new Bloco("Tensão");
+		Bloco corrente = new Bloco("Corrente");
+		ResultadoPotencia resultado = new ResultadoPotencia();
 		
-		contentPane.add(tensao);
-		contentPane.add(corrente);
+		simulacaoPane.add(tensao);
+		simulacaoPane.add(corrente);
+		simulacaoPane.add(resultado);
 	}
 	
 	public void mostrarTela() {
-		topoPagina.add(titulo);
+		
 		setVisible(true);
 	}
 	
@@ -47,15 +48,17 @@ public class Simulacao1 extends Simulacao{
 		}
 		
 		public void preparaGUI() {
+			setPreferredSize(new Dimension(500, 300));
 			setLayout(new GridLayout(2,1));
 			tituloBloco = new JLabel(titulo + ": ");
-			tituloBloco.setFont(new Font("Dialog", Font.BOLD, 20));
+			tituloBloco.setFont(new Font("Dialog", Font.PLAIN, 20));
 			
 			painel = new JPanel(new GridLayout(1,2));
-			imputUsuario = new JPanel(new FlowLayout());
+			imputUsuario = new JPanel(new GridLayout(3,1));
 			imputsAmp = new JPanel (new GridLayout(1,2));
 			imputsAng = new JPanel (new GridLayout(1,2));
 			resposta = new JPanel(new GridLayout(2,1));
+			JPanel botao = new JPanel(new FlowLayout());
 			
 			add(tituloBloco);
 			painel.add(imputUsuario);
@@ -79,12 +82,66 @@ public class Simulacao1 extends Simulacao{
 			simular = new JButton("simular");
 			simular.setFont(new Font("Dialog", Font.PLAIN, 12));
 			simular.setPreferredSize(new Dimension(100, 25));
+			botao.add(simular);
 			
 			imputUsuario.add(imputsAmp);
 			imputUsuario.add(imputsAng);
-			imputUsuario.add(simular);
+			imputUsuario.add(botao);
 			
 		}	
+	}
+	
+	private class ResultadoPotencia extends JPanel{
+		private JLabel potAtiva, potReativa, potAparente, fatPotencia;
+		private JLabel potAtivaValor, potReativaValor, potAparenteValor, fatPotenciaValor;
+		private JPanel valores, graficos;
+		
+		private ResultadoPotencia() {
+			preparaGUI();
+		}
+		
+		private void preparaGUI() {
+			setLayout(new GridLayout(2,1));
+			valores = new JPanel(new GridLayout(4,2));
+			graficos = new JPanel(new GridLayout(4,1));
+			
+			add(valores);
+			add(graficos);	
+			
+			potAtiva = new JLabel("Potencia Ativa: ");
+			potAtiva.setFont(new Font("Dialog", Font.PLAIN, 12));
+			
+			potReativa = new JLabel("Potencia Reativa: ");
+			potReativa.setFont(new Font("Dialog", Font.PLAIN, 12));
+			
+			potAparente = new JLabel("Potencia Aparente: ");
+			potAparente.setFont(new Font("Dialog", Font.PLAIN, 12));
+			
+			fatPotencia = new JLabel("Fator Potencia : ");
+			fatPotencia.setFont(new Font("Dialog", Font.PLAIN, 12));
+			
+			potAtivaValor = new JLabel("0");
+			potAtivaValor.setFont(new Font("Dialog", Font.BOLD, 12));
+			
+			potReativaValor = new JLabel("0");
+			potReativaValor.setFont(new Font("Dialog", Font.BOLD, 12));
+			
+			potAparenteValor = new JLabel("0");
+			potAparenteValor.setFont(new Font("Dialog", Font.BOLD, 12));
+			
+			fatPotenciaValor = new JLabel("0");
+			fatPotenciaValor.setFont(new Font("Dialog", Font.BOLD, 12));
+			
+			valores.add(potAtiva);
+			valores.add(potAtivaValor);
+			valores.add(potReativa);
+			valores.add(potReativaValor);
+			valores.add(potAparente);
+			valores.add(potAparenteValor);
+			valores.add(fatPotencia);
+			valores.add(fatPotenciaValor);
+			
+		}
 	}
 
 }

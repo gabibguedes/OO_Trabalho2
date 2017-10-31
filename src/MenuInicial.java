@@ -28,8 +28,10 @@ public class MenuInicial extends Tela{
 		contentPane.setBorder(new EmptyBorder (40, 40, 40, 40));
 		contentPane.setLayout(new GridLayout(3,1));
 		
-		titulo = new JLabel("", JLabel.LEFT);
-		descricao = new JLabel("", JLabel.LEFT);
+		titulo = new JLabel(TITULO, JLabel.LEFT);
+		descricao = new JLabel(DESCRICAO, JLabel.LEFT);
+		titulo.setFont(new Font("Dialog", Font.PLAIN, 40));
+		descricao.setFont(new Font("Dialog", Font.PLAIN, 14));
 		
 		simulacoes = new JPanel();
 		simulacoes.setLayout(new FlowLayout());
@@ -40,10 +42,7 @@ public class MenuInicial extends Tela{
 	}
 	
 	public void mostrarTela() {
-		titulo.setText(TITULO);
-		titulo.setFont(new Font("Dialog", Font.PLAIN, 40));
-		descricao.setText(DESCRICAO);
-		descricao.setFont(new Font("Dialog", Font.PLAIN, 14));
+
 		
 		JButton simulacao1 = new JButton(SIMULACAO1);
 		JButton simulacao2 = new JButton(SIMULACAO2);
