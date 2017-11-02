@@ -1,4 +1,4 @@
-package src;
+package src.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import src.controllers.ButtonClickListener;
 
 public class Simulacao extends Tela{
 
@@ -36,7 +38,6 @@ public class Simulacao extends Tela{
 		
 		voltar = new JButton("Voltar ao Menu Principal");
 		voltar.setFont(new Font("Dialog", Font.BOLD, 10));
-		voltar.setPreferredSize(new Dimension(100, 30));
 		
 		voltar.setActionCommand(MENU);
 		voltar.addActionListener(new ButtonClickListener(janela));

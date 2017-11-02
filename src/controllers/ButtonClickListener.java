@@ -1,5 +1,6 @@
-package src;
+package src.controllers;
 
+import src.view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -7,6 +8,10 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import src.view.MenuInicial;
+import src.view.Simulacao1;
+import src.view.Tela;
 
 
 public class ButtonClickListener implements ActionListener {
@@ -40,7 +45,6 @@ public class ButtonClickListener implements ActionListener {
 				System.out.println("Simulação 3 não implementado");
 				break;
 			case Tela.MENU:
-//				System.out.println("menu");
 				try {
 					MenuInicial menu = new MenuInicial(janela);
 					menu.mostrarTela();

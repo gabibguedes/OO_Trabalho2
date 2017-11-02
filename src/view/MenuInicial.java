@@ -1,4 +1,4 @@
-package src;
+package src.view;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import src.controllers.ButtonClickListener;
 
 import javax.swing.JButton;
 
@@ -31,7 +33,7 @@ public class MenuInicial extends Tela{
 		contentPane.setBorder(new EmptyBorder (40, 40, 40, 40));
 		contentPane.setLayout(new GridLayout(3,1));
 		
-		titulo = new JLabel(TITULO, JLabel.LEFT);
+		titulo = new JLabel(TITULO, JLabel.CENTER);
 		descricao = new JLabel(DESCRICAO, JLabel.LEFT);
 		titulo.setFont(new Font("Dialog", Font.PLAIN, 40));
 		descricao.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -72,8 +74,6 @@ public class MenuInicial extends Tela{
 		simulacoes.add(simulacao3);
 	
 		contentPane.setVisible(true);
-//		janela.setContentPane(contentPane);
-//		janela.add(contentPane);
 		janela.setVisible(true);
 
 	}

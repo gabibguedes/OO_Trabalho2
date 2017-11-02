@@ -1,4 +1,4 @@
-package src;
+package src.view;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Tela{
+public class Tela {
 	public static final String TITULO = "Aprenda QEE";
 	public static final String MENU = "Menu Inicial";
 	public static final String SIMULACAO1 = "Simular Fluxo de Potência Fundamental";

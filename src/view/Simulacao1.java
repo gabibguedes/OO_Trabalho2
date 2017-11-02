@@ -1,4 +1,4 @@
-package src;
+package src.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -33,12 +33,7 @@ public class Simulacao1 extends Simulacao{
 		simulacaoPane.add(resultado);
 	}
 	
-	public void mostrarTela() {
-//		
-//		telaInicial.add(this);
-//		telaInicial.setVisible(true);
-//		painelCadastro.setVisible(true);
-//		
+	public void mostrarTela() {		
 		janela.setVisible(true);
 		contentPane.setVisible(true);
 	}
