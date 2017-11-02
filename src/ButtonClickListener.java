@@ -2,16 +2,36 @@ package src;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 public class ButtonClickListener implements ActionListener {
+	private JFrame janela;
+	
+	public ButtonClickListener(JFrame janela) {
+		this.janela = janela;
+	}
+	
 	public void actionPerformed(ActionEvent evento){
 		String comando = evento.getActionCommand();
 		
 		switch (comando) {
 			case Tela.SIMULACAO1:
-				Simulacao1 teste = new Simulacao1();
-				teste.mostrarTela();
-				teste.setVisible(true);
+				try {
+					Simulacao1 teste = new Simulacao1(janela);
+					teste.mostrarTela();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				break;
 			case Tela.SIMULACAO2:
 				System.out.println("Simulação 2: não implementado");
@@ -21,9 +41,16 @@ public class ButtonClickListener implements ActionListener {
 				break;
 			case Tela.MENU:
 //				System.out.println("menu");
-				MenuInicial menu = new MenuInicial();
-				menu.mostrarTela();
-				menu.setVisible(true);
+				try {
+					MenuInicial menu = new MenuInicial(janela);
+					menu.mostrarTela();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 		}
 			

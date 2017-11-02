@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,12 +16,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
 public class MenuInicial extends Tela{
+
 	private JLabel titulo, descricao;
 	private JPanel simulacoes;
 
 	private static final String DESCRICAO = "Escolha uma das opções abaixo e faça a sua simulação.";
 	
-	public MenuInicial() {
+	public MenuInicial(JFrame janela) throws IOException{
+		super(janela);
 		preparaGUI();
 	}
 	
@@ -60,15 +63,19 @@ public class MenuInicial extends Tela{
 		simulacao2.setActionCommand(SIMULACAO2);
 		simulacao3.setActionCommand(SIMULACAO3);
 		
-		simulacao1.addActionListener(new ButtonClickListener());
-		simulacao2.addActionListener(new ButtonClickListener());
-		simulacao3.addActionListener(new ButtonClickListener());
+		simulacao1.addActionListener(new ButtonClickListener(janela));
+		simulacao2.addActionListener(new ButtonClickListener(janela));
+		simulacao3.addActionListener(new ButtonClickListener(janela));
 		
 		simulacoes.add(simulacao1);
 		simulacoes.add(simulacao2);
 		simulacoes.add(simulacao3);
-		
-		setVisible(true);
+	
+		contentPane.setVisible(true);
+//		janela.setContentPane(contentPane);
+//		janela.add(contentPane);
+		janela.setVisible(true);
+
 	}
 		
 }

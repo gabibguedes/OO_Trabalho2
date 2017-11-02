@@ -5,20 +5,25 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class Simulacao extends Tela{
+
 	protected JLabel titulo;
 	protected JPanel topoPagina, simulacaoPane, botao;
 	protected JButton voltar;
 	protected String simulacao;
-
-	public Simulacao(){
+	
+	public Simulacao(JFrame janela) throws IOException{
+		super(janela);
 	}
+
 	
 	public void preparaSimulacao(String simulacao) {
 		contentPane.setLayout(new BorderLayout(3,1));
@@ -34,7 +39,7 @@ public class Simulacao extends Tela{
 		voltar.setPreferredSize(new Dimension(100, 30));
 		
 		voltar.setActionCommand(MENU);
-		voltar.addActionListener(new ButtonClickListener());
+		voltar.addActionListener(new ButtonClickListener(janela));
 		botao.add(voltar);
 		
 

@@ -4,8 +4,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,11 +15,12 @@ import javax.swing.border.EmptyBorder;
 
 public class Simulacao1 extends Simulacao{
 	
-	public Simulacao1() {
+	public Simulacao1(JFrame janela) throws IOException{
+		super(janela);
 		preparaSimulacao(SIMULACAO1);
 		preparaGUI();
 	}
-	
+
 	private void preparaGUI() {
 		simulacaoPane.setLayout(new GridLayout(3,1));		
 		
@@ -31,8 +34,13 @@ public class Simulacao1 extends Simulacao{
 	}
 	
 	public void mostrarTela() {
-		
-		setVisible(true);
+//		
+//		telaInicial.add(this);
+//		telaInicial.setVisible(true);
+//		painelCadastro.setVisible(true);
+//		
+		janela.setVisible(true);
+		contentPane.setVisible(true);
 	}
 	
 	private class Bloco extends JPanel{
