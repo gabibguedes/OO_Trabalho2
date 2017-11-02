@@ -14,13 +14,13 @@ import src.view.Simulacao1;
 import src.view.Tela;
 
 
-public class ButtonClickListener implements ActionListener {
+public class MudarTela implements ActionListener {
 	private JFrame janela;
 	
-	public ButtonClickListener(JFrame janela) {
+	public MudarTela(JFrame janela) {
 		this.janela = janela;
 	}
-	
+
 	public void actionPerformed(ActionEvent evento){
 		String comando = evento.getActionCommand();
 		

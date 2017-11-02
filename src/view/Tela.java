@@ -13,6 +13,11 @@ public class Tela {
 	public static final String SIMULACAO2 = "Simular Distorção Harmonica";
 	public static final String SIMULACAO3 = "Simular Fluxo de Potência Harmonico";
 	
+	public static final String FONTE = "Dialog";
+	public static final int TAMANHO_TITULO = 40;
+	public static final int TAMANHO_SUBTITULO = 20;
+	public static final int TAMANHO_TEXTO = 12;
+	
 	protected JPanel contentPane;
 	protected JFrame janela;
 	

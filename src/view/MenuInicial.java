@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import src.controllers.ButtonClickListener;
+import src.controllers.MudarTela;
 
 import javax.swing.JButton;
 
@@ -35,8 +35,8 @@ public class MenuInicial extends Tela{
 		
 		titulo = new JLabel(TITULO, JLabel.CENTER);
 		descricao = new JLabel(DESCRICAO, JLabel.LEFT);
-		titulo.setFont(new Font("Dialog", Font.PLAIN, 40));
-		descricao.setFont(new Font("Dialog", Font.PLAIN, 14));
+		titulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TITULO));
+		descricao.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 		
 		simulacoes = new JPanel();
 		simulacoes.setLayout(new FlowLayout());
@@ -53,21 +53,21 @@ public class MenuInicial extends Tela{
 		JButton simulacao2 = new JButton(SIMULACAO2);
 		JButton simulacao3 = new JButton(SIMULACAO3);
 		
-		simulacao1.setFont(new Font("Dialog", Font.PLAIN, 14));
-		simulacao2.setFont(new Font("Dialog", Font.PLAIN, 14));
-		simulacao3.setFont(new Font("Dialog", Font.PLAIN, 14));
+		simulacao1.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+		simulacao2.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+		simulacao3.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 		
 		simulacao1.setPreferredSize(new Dimension(350, 25));
 		simulacao2.setPreferredSize(new Dimension(350, 25));
-		simulacao3.setPreferredSize(new Dimension(350, 28));
+		simulacao3.setPreferredSize(new Dimension(350, 25));
 		
 		simulacao1.setActionCommand(SIMULACAO1);
 		simulacao2.setActionCommand(SIMULACAO2);
 		simulacao3.setActionCommand(SIMULACAO3);
 		
-		simulacao1.addActionListener(new ButtonClickListener(janela));
-		simulacao2.addActionListener(new ButtonClickListener(janela));
-		simulacao3.addActionListener(new ButtonClickListener(janela));
+		simulacao1.addActionListener(new MudarTela(janela));
+		simulacao2.addActionListener(new MudarTela(janela));
+		simulacao3.addActionListener(new MudarTela(janela));
 		
 		simulacoes.add(simulacao1);
 		simulacoes.add(simulacao2);

@@ -13,13 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import src.controllers.ButtonClickListener;
+import src.controllers.MudarTela;
 
 public class Simulacao extends Tela{
 
 	protected JLabel titulo;
-	protected JPanel topoPagina, simulacaoPane, botao;
-	protected JButton voltar;
+	protected JPanel topoPagina, simulacaoPane, botoes;
+	protected JButton voltar, simularResultado;
 	protected String simulacao;
 	
 	public Simulacao(JFrame janela) throws IOException{
@@ -30,23 +30,30 @@ public class Simulacao extends Tela{
 	public void preparaSimulacao(String simulacao) {
 		contentPane.setLayout(new BorderLayout(3,1));
 		
-		botao = new JPanel(new FlowLayout());
+		botoes = new JPanel(new FlowLayout());
 		simulacaoPane = new JPanel();
 		
 		titulo = new JLabel(simulacao, JLabel.CENTER);
-		titulo.setFont(new Font("Dialog", Font.BOLD, 25));
+		titulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));
 		
 		voltar = new JButton("Voltar ao Menu Principal");
-		voltar.setFont(new Font("Dialog", Font.BOLD, 10));
+		voltar.setFont(new Font(FONTE, Font.BOLD, TAMANHO_TEXTO));
+		voltar.setPreferredSize(new Dimension(250, 25));
 		
 		voltar.setActionCommand(MENU);
-		voltar.addActionListener(new ButtonClickListener(janela));
-		botao.add(voltar);
+		voltar.addActionListener(new MudarTela(janela));
+		
+		simularResultado = new JButton("Simular Resultado");
+		simularResultado.setFont(new Font(FONTE, Font.BOLD, TAMANHO_TEXTO));
+		simularResultado.setPreferredSize(new Dimension(250, 25));
+		
+		botoes.add(voltar);
+		botoes.add(simularResultado);
 		
 
 		
 		contentPane.add(titulo, BorderLayout.NORTH);
 		contentPane.add(simulacaoPane, BorderLayout.CENTER);
-		contentPane.add(voltar, BorderLayout.SOUTH);
+		contentPane.add(botoes, BorderLayout.SOUTH);
 	}
 }
