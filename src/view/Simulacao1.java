@@ -198,16 +198,16 @@ public class Simulacao1 extends Simulacao{
 			add(tituloResultado, BorderLayout.NORTH);
 			add(painel);
 			
-			potAtiva = new JLabel("Potencia Ativa: ");
+			potAtiva = new JLabel("Potência Ativa: ");
 			potAtiva.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			
-			potReativa = new JLabel("Potencia Reativa: ");
+			potReativa = new JLabel("Potência Reativa: ");
 			potReativa.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			
-			potAparente = new JLabel("Potencia Aparente: ");
+			potAparente = new JLabel("Potência Aparente: ");
 			potAparente.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			
-			fatPotencia = new JLabel("Fator Potencia : ");
+			fatPotencia = new JLabel("Fator Potência : ");
 			fatPotencia.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			
 			potAtivaValor = new JLabel("0");
@@ -231,9 +231,9 @@ public class Simulacao1 extends Simulacao{
 			valores.add(fatPotencia);
 			valores.add(fatPotenciaValor);
 			
-			potGrafico = new JLabel ("Potencia Instantanea");
+			potGrafico = new JLabel ("Potência Instantânea:");
 			potGrafico.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
-			potTriangulo = new JLabel ("Triangulo de Potência");
+			potTriangulo = new JLabel ("Triangulo de Potência:");
 			potTriangulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			
 			pontos = new ArrayList<Double>();
