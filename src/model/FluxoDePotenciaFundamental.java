@@ -1,11 +1,14 @@
 package src.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FluxoDePotenciaFundamental {
 	double amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
 	double potAtiva, potReativa, potAparente, fatPotencia;
-	List<Double> pontosGrafico;
+	List<Double> pontosGrafico, pontosTensao, pontosCorrente;
+	
+	final double freqAng = 120 * Math.PI;
 	
 	public FluxoDePotenciaFundamental() {}
 	
@@ -76,8 +79,48 @@ public class FluxoDePotenciaFundamental {
 		return fatPotencia;
 	}
 	
-	public List<Double> pontosOnda(){
+	public List<Double> calcularOndaTensao(){
+		double ponto;
+		pontosTensao = new ArrayList<>();
 		
+		for(double t = 0; t< 200; t++) {
+			ponto = v(t);
+			pontosTensao.add(ponto);
+		}
+		return pontosTensao;
+	}
+	
+	public List<Double> calcularOndaCorrente(){
+		double ponto;
+		pontosCorrente = new ArrayList<>();
+		
+		for(double t = 0; t< 200; t++) {
+			ponto = i(t);
+			pontosCorrente.add(ponto);
+		}
+		return pontosCorrente;
+	}
+	
+	public List<Double> calcularOnda(){
+		double ponto;
+		pontosGrafico = new ArrayList<>();
+		
+		for(double t = 0; t<200; t++) {
+			ponto = v(t) * i(t);
+			pontosGrafico.add(ponto);
+		}
 		return pontosGrafico;
+	}
+	
+	private double v(double x) {
+		double v;
+		v = amplitudeTensao * Math.cos(Math.toRadians((freqAng * x) + anguloTensao));
+		return v;
+	}
+	
+	private double i(double x) {
+		double i;
+		i = amplitudeCorrente * Math.cos(Math.toRadians((freqAng * x) + anguloCorrente));
+		return i;
 	}
 }

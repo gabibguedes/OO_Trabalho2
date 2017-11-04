@@ -27,25 +27,53 @@ public class GraphPanel extends JPanel {
     private int pointWidth = 5; // tamanho do ponto
     private int numberYDivisions = 2; //estava 10//divisoes eixo y 
     private int numberXDivisions = 13; 
+    private double minScore, maxScore;
+    private boolean tamanhoDefinido = false;
     
     private List<Double> scores;
     private Double Amplitude = 220.0;
 
     private double getMinScore() {
-        double minScore = Double.MAX_VALUE;
-        for (Double score : scores) {
-            minScore = Math.min(-220, score);
-        }
-        return minScore;
+    	if(tamanhoDefinido) {
+    		double minScore = Double.MAX_VALUE;
+            for (Double score : scores) {
+                minScore = Math.min(this.minScore, score);
+            }
+            return minScore;
+    	}else {
+    		double minScore = Double.MAX_VALUE;
+            for (Double score : scores) {
+                minScore = Math.min(minScore, score);
+            }
+            return minScore;
+    	}
+        
     }
 
     private double getMaxScore() {
-        double maxScore = Double.MIN_VALUE;
-        for (Double score : scores) {
-            maxScore = Math.max(220, score);
-        }
-        return maxScore;
+    	if(tamanhoDefinido) {
+    		double maxScore = Double.MIN_VALUE;
+            for (Double score : scores) {
+                maxScore = Math.max(this.maxScore, score);
+            }
+            return maxScore;
+    	}else {
+    		double maxScore = Double.MIN_VALUE;
+            for (Double score : scores) {
+                maxScore = Math.max(maxScore, score);
+            }
+            return maxScore;
+    	}
+        
     }
+    
+    public GraphPanel(double maxScore, double minScore, List<Double> scores) {
+    	this.maxScore = maxScore;
+    	this.minScore = minScore;
+        this.scores = scores;
+        
+        tamanhoDefinido = true;
+    } 
    
     public GraphPanel(List<Double> scores) {
         this.scores = scores;
@@ -125,6 +153,12 @@ public class GraphPanel extends JPanel {
             g2.drawLine(x1, y1, x2, y2); //desenha as linhas azuis
             
         }
+    }
+    
+    public void setScores(List<Double> scores) {
+        this.scores = scores;
+        invalidate();
+        this.repaint();
     }
     
 //    public static void main(String[] args) {//3

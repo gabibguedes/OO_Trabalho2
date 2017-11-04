@@ -14,11 +14,15 @@ import src.view.Tela;
 public class AcoesSimulacao1 implements ActionListener{
 	private Bloco painel;
 	private Simulacao1 simulacao;
-	private double  amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
+	private double  angulo, amplitude;
 	private FluxoDePotenciaFundamental calculo;
 	
 	public AcoesSimulacao1(Bloco painel, Simulacao1 simulacao) {
 		this.painel = painel;
+		this.simulacao = simulacao;
+	}
+	
+	public AcoesSimulacao1(Simulacao1 simulacao) {
 		this.simulacao = simulacao;
 	}
 
@@ -29,15 +33,18 @@ public class AcoesSimulacao1 implements ActionListener{
 		switch (comando){
 			case Simulacao1.TENSAO:
 				try {
-					amplitudeTensao = Double.parseDouble(painel.getAmplitudeTxt());
-					anguloTensao = Double.parseDouble(painel.getAnguloTxt());
+					amplitude = Double.parseDouble(painel.getAmplitudeTxt());
+					angulo = Double.parseDouble(painel.getAnguloTxt());
 
-					if(amplitudeTensao <= 0 || amplitudeTensao >= 220) {
+					if(amplitude < 0 || amplitude > 220) {
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
 					
-					System.out.println("Forma de onda da Tensão: não implementado");
+					calculo = new FluxoDePotenciaFundamental();
+					calculo.setTensao(amplitude, angulo);
+					
+					painel.getGrafico().setScores(calculo.calcularOndaTensao());
 					
 				}catch(NumberFormatException e) {
 					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\nTensão: 0 ≤ VRMS ≤ 220");
@@ -47,15 +54,18 @@ public class AcoesSimulacao1 implements ActionListener{
 				
 			case Simulacao1.CORRENTE:
 				try {
-					amplitudeCorrente = Double.parseDouble(painel.getAmplitudeTxt());
-					anguloCorrente = Double.parseDouble(painel.getAnguloTxt());
+					amplitude = Double.parseDouble(painel.getAmplitudeTxt());
+					angulo = Double.parseDouble(painel.getAnguloTxt());
 					
-					if(amplitudeCorrente <= 0 || amplitudeCorrente >= 100) {
+					if(amplitude < 0 || amplitude > 100) {
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
 					
-					System.out.println("Forma de onda da Corrente: não implementado");
+					calculo = new FluxoDePotenciaFundamental();
+					calculo.setCorrente(amplitude, angulo);
+					
+					painel.getGrafico().setScores(calculo.calcularOndaCorrente());
 					
 				}catch(NumberFormatException e) {
 					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\nCorrente: 0 ≤ IRMS ≤ 100");
@@ -65,14 +75,16 @@ public class AcoesSimulacao1 implements ActionListener{
 				
 			case Tela.SIMULACAO1:
 				try {
+					double  amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
+					
 					amplitudeTensao = Double.parseDouble(simulacao.getBlocoTensao().getAmplitudeTxt());
 					anguloTensao = Double.parseDouble(simulacao.getBlocoTensao().getAnguloTxt());
 
 					amplitudeCorrente = Double.parseDouble(simulacao.getBlocoCorrente().getAmplitudeTxt());
 					anguloCorrente = Double.parseDouble(simulacao.getBlocoCorrente().getAnguloTxt());
 					
-					if(amplitudeCorrente <= 0 || amplitudeCorrente >= 100
-							|| amplitudeTensao <= 0 || amplitudeTensao >= 220) {
+					if(amplitudeCorrente < 0 || amplitudeCorrente > 100
+							|| amplitudeTensao < 0 || amplitudeTensao > 220) {
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
@@ -82,6 +94,10 @@ public class AcoesSimulacao1 implements ActionListener{
 					simulacao.getResultadoPotencia().setPotReativaValor(calculo.calcularPotReativa());
 					simulacao.getResultadoPotencia().setPotAparenteValor(calculo.calcularPotAparente());
 					simulacao.getResultadoPotencia().setFatPotenciaValor(calculo.calcularFatPotencia());
+					
+					simulacao.getBlocoTensao().getGrafico().setScores(calculo.calcularOndaTensao());
+					simulacao.getBlocoCorrente().getGrafico().setScores(calculo.calcularOndaCorrente());
+					simulacao.getResultadoPotencia().getGrafico().setScores(calculo.calcularOnda());
 					
 				}catch(NumberFormatException e) {
 					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\nTensão: 0 ≤ VRMS ≤ 220\nCorrente: 0 ≤ IRMS ≤ 100");

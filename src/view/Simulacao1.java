@@ -44,13 +44,12 @@ public class Simulacao1 extends Simulacao{
 	private void preparaGUI() {
 		simulacaoPane.setLayout(new GridLayout(3,1));		
 		
-		Bloco nulo = null;
 		tensao = new Bloco(TENSAO, this);
 		corrente = new Bloco(CORRENTE, this);
 		resultado = new ResultadoPotencia();
 		
 		simularResultado.setActionCommand(SIMULACAO1);
-		simularResultado.addActionListener(new AcoesSimulacao1(nulo, this));
+		simularResultado.addActionListener(new AcoesSimulacao1(this));
 		
 		simulacaoPane.add(tensao);
 		simulacaoPane.add(corrente);
@@ -142,7 +141,15 @@ public class Simulacao1 extends Simulacao{
 			pontos = new ArrayList<Double>();
 			pontos.add(0.0);
 			
-			grafico = new GraphPanel(pontos);
+			switch (titulo) {
+				case TENSAO:
+					grafico = new GraphPanel(220.0, -220.0, pontos);
+					break;
+				case CORRENTE:
+					grafico = new GraphPanel(100.0, -100.0, pontos);
+					break;
+			}	
+			
 			grafico.setPreferredSize(new Dimension(200,200));
 			
 			resposta.add(tituloGrafico, BorderLayout.NORTH);
