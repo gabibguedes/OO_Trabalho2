@@ -76,8 +76,7 @@ public class AcoesSimulacao1 implements ActionListener{
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
-					
-//					System.out.println("Simulação 1: não implementado");
+
 					calculo = new FluxoDePotenciaFundamental(amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente);
 					simulacao.getResultadoPotencia().setPotAtivaValor(calculo.calcularPotAtiva());
 					simulacao.getResultadoPotencia().setPotReativaValor(calculo.calcularPotReativa());

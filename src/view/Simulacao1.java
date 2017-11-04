@@ -8,6 +8,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -29,6 +32,8 @@ public class Simulacao1 extends Simulacao{
 	
 	private Bloco tensao, corrente;
 	private ResultadoPotencia resultado;
+	
+	NumberFormat formatter = new DecimalFormat("#0.0000");
 	
 	public Simulacao1(JFrame janela) throws IOException{
 		super(janela);
@@ -58,14 +63,14 @@ public class Simulacao1 extends Simulacao{
 	}
 	
 	public class Bloco extends JPanel{
-		private JLabel tituloBloco, amplitude, angulo, graficoTitulo;
+		private JLabel tituloBloco, amplitude, angulo, tituloGrafico;
 		private JTextField amplitudeTxt, anguloTxt;
-		private JPanel painel, imputUsuario, imputsAmp, imputsAng, resposta;
+		private JPanel imputUsuario, imputsAmp, imputsAng, resposta;
 		private String titulo, simboloAmplitude;
 		private JButton simular;
 		private GraphPanel grafico;
-		private List <Double> pontos;
 		private Simulacao1 simulacao;
+		private List<Double> pontos;
 		
 		public Bloco(String titulo, Simulacao1 simulacao){
 				this.titulo = titulo;
@@ -84,37 +89,40 @@ public class Simulacao1 extends Simulacao{
 		
 		public void preparaGUI() {
 			setPreferredSize(new Dimension(500, 300));
-			setLayout(new GridLayout(2,1));
+			setLayout(new BorderLayout(2,2));
 			tituloBloco = new JLabel(titulo + ": ");
 			tituloBloco.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));
 			
-			
-			
-			painel = new JPanel(new BorderLayout(1,2));
 			imputUsuario = new JPanel(new GridLayout(3,1));
-			imputsAmp = new JPanel (new GridLayout(1,2));
-			imputsAng = new JPanel (new GridLayout(1,2));
+			imputsAmp = new JPanel (new BorderLayout());
+			imputsAng = new JPanel (new BorderLayout());
 			resposta = new JPanel(new BorderLayout());
 			JPanel botao = new JPanel(new FlowLayout());
+			JPanel amplitudeTxtP = new JPanel(new FlowLayout());
+			JPanel anguloTxtP = new JPanel(new FlowLayout());
 			
-			add(tituloBloco);
-			painel.add(imputUsuario, BorderLayout.WEST);
-			painel.add(resposta);
-			add(painel);
+			add(tituloBloco, BorderLayout.NORTH);
+			add(imputUsuario, BorderLayout.WEST);
+			add(resposta);
 			
 			amplitude = new JLabel("Amplitude ("+ simboloAmplitude +"): ");
 			amplitude.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			amplitudeTxt = new JTextField();
 			amplitudeTxt.setPreferredSize(new Dimension(100, 25));
-			imputsAmp.add(amplitude);
-			imputsAmp.add(amplitudeTxt);
+			amplitudeTxt.setAlignmentY(amplitude.getAlignmentY());
+			imputsAmp.add(amplitude, BorderLayout.NORTH);
+			amplitudeTxtP.add(amplitudeTxt);
+			imputsAmp.add(amplitudeTxtP);
+			imputsAmp.setBorder(new EmptyBorder(5, 5, 5, 5));
 			
 			angulo = new JLabel("Angulo de fase (0º): ");
 			angulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			anguloTxt = new JTextField();
 			anguloTxt.setPreferredSize(new Dimension(100, 25));
-			imputsAng.add(angulo);
-			imputsAng.add(anguloTxt);
+			imputsAng.add(angulo, BorderLayout.NORTH);
+			anguloTxtP.add(anguloTxt);
+			imputsAng.add(anguloTxtP);
+			imputsAng.setBorder(new EmptyBorder(5, 5, 5, 5));
 						
 			simular = new JButton("Simular Forma de Onda");
 			simular.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
@@ -128,13 +136,18 @@ public class Simulacao1 extends Simulacao{
 			imputUsuario.add(imputsAng);
 			imputUsuario.add(botao);
 			
-			graficoTitulo = new JLabel("Forma de onda:");
-			graficoTitulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+			tituloGrafico = new JLabel("Forma de Onda da " + titulo + ":");
+			tituloGrafico.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			
-//			grafico = new GraphPanel(pontos);
+			pontos = new ArrayList<Double>();
+			pontos.add(0.0);
+			
+			grafico = new GraphPanel(pontos);
+			grafico.setPreferredSize(new Dimension(200,200));
+			
+			resposta.add(tituloGrafico, BorderLayout.NORTH);
 			resposta.setBorder(new EmptyBorder (10, 10, 10, 10));
-			resposta.add(graficoTitulo, BorderLayout.NORTH);
-//			resposta.add(grafico);
+			resposta.add(grafico);
 		}
 
 		public String getAmplitudeTxt() {
@@ -144,23 +157,30 @@ public class Simulacao1 extends Simulacao{
 		public String getAnguloTxt() {
 			return anguloTxt.getText();
 		}
+		
+		public GraphPanel getGrafico() {
+			return grafico;
+		}
 	}
 	
 	public class ResultadoPotencia extends JPanel{
 		private JLabel tituloResultado, potAtiva, potReativa, potAparente, fatPotencia, potGrafico, potTriangulo;
 		private JLabel potAtivaValor, potReativaValor, potAparenteValor, fatPotenciaValor;
 		private JPanel painel, valores, graficos;
-
+		private GraphPanel grafico, triangulo;
+		private List<Double> pontos;
 
 		private ResultadoPotencia() {
 			preparaGUI();
 		}
 		
 		private void preparaGUI() {
-			setLayout(new GridLayout(2,1));
+			setLayout(new BorderLayout());
 			painel = new JPanel (new BorderLayout(2,1));
 			valores = new JPanel(new GridLayout(4,2));
-			graficos = new JPanel(new GridLayout(4,1));
+			graficos = new JPanel(new BorderLayout());
+			JPanel graficoOnda = new JPanel (new BorderLayout());
+			JPanel graficoTriangulo = new JPanel (new BorderLayout());
 			
 			tituloResultado = new JLabel("Resultado: ");
 			tituloResultado.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));
@@ -168,7 +188,7 @@ public class Simulacao1 extends Simulacao{
 			painel.add(valores, BorderLayout.WEST);
 			painel.add(graficos);
 
-			add(tituloResultado);
+			add(tituloResultado, BorderLayout.NORTH);
 			add(painel);
 			
 			potAtiva = new JLabel("Potencia Ativa: ");
@@ -208,24 +228,47 @@ public class Simulacao1 extends Simulacao{
 			potGrafico.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			potTriangulo = new JLabel ("Triangulo de Potência");
 			potTriangulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+			
+			pontos = new ArrayList<Double>();
+			pontos.add(0.0);
+			
+			grafico = new GraphPanel(pontos);
+			grafico.setPreferredSize(new Dimension(100,100));
+			
+			graficoOnda.add(potGrafico, BorderLayout.NORTH);
+			graficoOnda.add(grafico);
+			graficoOnda.setBorder(new EmptyBorder (10, 10, 10, 10));
+			graficos.add(graficoOnda);
+			
+			triangulo = new GraphPanel(pontos);
+			triangulo.setPreferredSize(new Dimension(100,100));
+			
+			graficoTriangulo.add(potTriangulo, BorderLayout.NORTH);
+			graficoTriangulo.add(triangulo);
+			graficoTriangulo.setBorder(new EmptyBorder (10, 10, 10, 10));
+			graficos.add(graficoTriangulo, BorderLayout.EAST);
 				
 		}
 		
 
-		public void setPotAtivaValor(double potAtivaValCalculado) {
-			potAtivaValor.setText("" + potAtivaValCalculado);
+		public void setPotAtivaValor(double potAtivaValCalculado) {;
+			potAtivaValor.setText("" + formatter.format(potAtivaValCalculado) + " Watt");
 		}
 
 		public void setPotReativaValor(double potReativaValCalculado) {
-			potReativaValor.setText("" + potReativaValCalculado);
+			potReativaValor.setText("" + formatter.format(potReativaValCalculado) + " VAR");
 		}
 
 		public void setPotAparenteValor(double potAparenteValCalculado) {
-			potAparenteValor.setText("" + potAparenteValCalculado);
+			potAparenteValor.setText("" + formatter.format(potAparenteValCalculado) + " VA");
 		}
 
 		public void setFatPotenciaValor(double fatPotenciaValCalculado) {
-			fatPotenciaValor.setText("" + fatPotenciaValCalculado);
+			fatPotenciaValor.setText("" + formatter.format(fatPotenciaValCalculado));
+		}
+		
+		public GraphPanel getGrafico() {
+			return grafico;
 		}
 	}
 	

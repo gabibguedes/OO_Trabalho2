@@ -7,13 +7,49 @@ public class FluxoDePotenciaFundamental {
 	double potAtiva, potReativa, potAparente, fatPotencia;
 	List<Double> pontosGrafico;
 	
+	public FluxoDePotenciaFundamental() {}
+	
 	public FluxoDePotenciaFundamental(double amplitudeTensao, double amplitudeCorrente,
-			double anguloTensao, double anguloCorrente) {
+		double anguloTensao, double anguloCorrente) {
 		this.amplitudeTensao = amplitudeTensao;
 		this.amplitudeCorrente = amplitudeCorrente;
 		this.anguloTensao = anguloTensao;
 		this.anguloCorrente = anguloCorrente;
 		
+	}
+	
+	public List<Double> getPontosGrafico() {
+		return pontosGrafico;
+	}
+
+	public void setAmplitudeTensao(double amplitudeTensao) {
+		this.amplitudeTensao = amplitudeTensao;
+	}
+
+	public void setAmplitudeCorrente(double amplitudeCorrente) {
+		this.amplitudeCorrente = amplitudeCorrente;
+	}
+
+	public void setAnguloTensao(double anguloTensao) {
+		this.anguloTensao = anguloTensao;
+	}
+
+	public void setAnguloCorrente(double anguloCorrente) {
+		this.anguloCorrente = anguloCorrente;
+	}
+
+	public void setPontosGrafico(List<Double> pontosGrafico) {
+		this.pontosGrafico = pontosGrafico;
+	}
+
+	public void setTensao(double amplitudeTensao, double anguloTensao) {
+		this.amplitudeTensao = amplitudeTensao;
+		this.anguloTensao = anguloTensao;
+	}
+	
+	public void setCorrente(double amplitudeCorrente, double anguloCorrente) {
+		this.amplitudeCorrente = amplitudeCorrente;
+		this.anguloCorrente = anguloCorrente;
 	}
 	
 	public double calcularPotAtiva() {
@@ -38,5 +74,10 @@ public class FluxoDePotenciaFundamental {
 			fatPotencia = Math.cos(anguloTensao - anguloCorrente);
 		}
 		return fatPotencia;
+	}
+	
+	public List<Double> pontosOnda(){
+		
+		return pontosGrafico;
 	}
 }
