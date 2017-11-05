@@ -26,7 +26,7 @@ public class Tela {
 		janela.setLocationRelativeTo(null);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setTitle(TITULO);
-		janela.setSize(800, 800);
+		janela.setSize(720, 720);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder (20, 20, 20, 20));

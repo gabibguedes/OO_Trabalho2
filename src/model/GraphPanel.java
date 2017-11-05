@@ -24,9 +24,9 @@ public class GraphPanel extends JPanel {
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
-    private int pointWidth = 5; // tamanho do ponto
+    private int pointWidth = 2; // tamanho do ponto
     private int numberYDivisions = 2; //estava 10//divisoes eixo y 
-    private int numberXDivisions = 13; 
+    private int numberXDivisions = 2; 
     private double minScore, maxScore;
     private boolean tamanhoDefinido = false;
     
@@ -131,9 +131,9 @@ public class GraphPanel extends JPanel {
                     String xLabel = i/1571 + ""; //faz as divisoes
                     FontMetrics metrics = g2.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
-                    g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3); //desenha os numeros
+//                    g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3); //desenha os numeros
 	            	
-	               //g2.drawLine(x0, getHeight() - 56, x1, 550); //desenha as colunas dos numeros na linha do eixo x
+//	               g2.drawLine(x0, getHeight() - 56, x1, 550); //desenha as colunas dos numeros na linha do eixo x
 			    }  // drawLine acima era o debaixo, foi mofificado e colocado dentro
                    //g2.drawLine(x0, y0, x1, y1);
             }                 
