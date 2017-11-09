@@ -129,6 +129,9 @@ public class Bloco extends JPanel{
 					
 		imputUsuario.add(imputsAmp);
 		imputUsuario.add(imputsAng);
+		if(ehHarmonico) {
+			imputUsuario.add(imputsOrdemH);
+		}
 		imputUsuario.add(botao);
 			
 		if(ehHarmonico) {
