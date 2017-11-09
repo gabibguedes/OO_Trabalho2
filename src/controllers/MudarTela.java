@@ -1,6 +1,6 @@
-package src.controllers;
+package controllers;
 
-import src.view.*;
+import view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -9,9 +9,6 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import src.view.MenuInicial;
-import src.view.Simulacao1;
-import src.view.Tela;
 
 
 public class MudarTela implements ActionListener {

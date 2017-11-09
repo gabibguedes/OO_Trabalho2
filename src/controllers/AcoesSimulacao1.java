@@ -1,15 +1,16 @@
-package src.controllers;
+package controllers;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import src.model.FluxoDePotenciaFundamental;
-import src.view.Simulacao1;
-import src.view.Simulacao1.Bloco;
-import src.view.Tela;
+import model.FluxoDePotenciaFundamental;
+import view.Simulacao1;
+import view.Simulacao1.Bloco;
+import view.Tela;
 
 public class AcoesSimulacao1 implements ActionListener{
 	private Bloco painel;
@@ -47,7 +48,7 @@ public class AcoesSimulacao1 implements ActionListener{
 					painel.getGrafico().setScores(calculo.calcularOndaTensao());
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\nTensão: 0 ≤ VRMS ≤ 220");
+					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da tensão deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
 				}
 				
 				break;
@@ -68,7 +69,7 @@ public class AcoesSimulacao1 implements ActionListener{
 					painel.getGrafico().setScores(calculo.calcularOndaCorrente());
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\nCorrente: 0 ≤ IRMS ≤ 100");
+					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da corrente deve ser entre 0 ≤ IRMS ≤ 100 \ne o angulo deve estar em graus.");
 				}
 				
 				break;
@@ -100,7 +101,7 @@ public class AcoesSimulacao1 implements ActionListener{
 					simulacao.getResultadoPotencia().getGrafico().setScores(calculo.calcularOnda());
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\nTensão: 0 ≤ VRMS ≤ 220\nCorrente: 0 ≤ IRMS ≤ 100");
+					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da tensão deve ser entre 0 ≤ VRMS ≤ 220, \nda corrente entre 0 ≤ IRMS ≤ 100 e o angulo deve estar\nem graus.");
 				}
 				
 				break;

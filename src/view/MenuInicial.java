@@ -1,4 +1,4 @@
-package src.view;
+package view;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import src.controllers.MudarTela;
+import controllers.MudarTela;
 
 import javax.swing.JButton;
 

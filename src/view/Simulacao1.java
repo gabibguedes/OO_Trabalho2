@@ -1,4 +1,4 @@
-package src.view;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -21,9 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import src.controllers.AcoesSimulacao1;
-import src.controllers.MudarTela;
-import src.model.GraphPanel;
+import controllers.AcoesSimulacao1;
+import controllers.MudarTela;
 
 public class Simulacao1 extends Simulacao{
 	

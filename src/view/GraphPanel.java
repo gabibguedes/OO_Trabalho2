@@ -1,4 +1,4 @@
-package src.model;
+package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -131,7 +131,7 @@ public class GraphPanel extends JPanel {
                     String xLabel = i/1571 + ""; //faz as divisoes
                     FontMetrics metrics = g2.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
-                    g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3); //desenha os numeros
+//                    g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3); //desenha os numeros
 	            	
 	               //g2.drawLine(x0, getHeight() - 56, x1, 550); //desenha as colunas dos numeros na linha do eixo x
 			    }  // drawLine acima era o debaixo, foi mofificado e colocado dentro
