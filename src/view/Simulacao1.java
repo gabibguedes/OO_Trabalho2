@@ -32,7 +32,7 @@ public class Simulacao1 extends Simulacao{
 	private Bloco tensao, corrente;
 	private ResultadoPotencia resultado;
 	
-	NumberFormat formatter = new DecimalFormat("#0.0000");
+	NumberFormat formatter = new DecimalFormat("#0.00");
 	
 	public Simulacao1(JFrame janela) throws IOException{
 		super(janela);
@@ -60,114 +60,114 @@ public class Simulacao1 extends Simulacao{
 		contentPane.setVisible(true);
 	}
 	
-	public class Bloco extends JPanel{
-		private JLabel tituloBloco, amplitude, angulo, tituloGrafico;
-		private JTextField amplitudeTxt, anguloTxt;
-		private JPanel imputUsuario, imputsAmp, imputsAng, resposta;
-		private String titulo, simboloAmplitude;
-		private JButton simular;
-		private GraphPanel grafico;
-		private Simulacao1 simulacao;
-		private List<Double> pontos;
-		
-		public Bloco(String titulo, Simulacao1 simulacao){
-				this.titulo = titulo;
-				this.simulacao = simulacao;
-				
-				switch(titulo) {
-				case TENSAO:
-					simboloAmplitude = "VRMS";
-					break;
-				case CORRENTE:
-					simboloAmplitude = "IRMS";
-					break;
-				}
-				preparaGUI();
-		}
-		
-		public void preparaGUI() {
-			setPreferredSize(new Dimension(500, 300));
-			setLayout(new BorderLayout(2,2));
-			tituloBloco = new JLabel(titulo + ": ");
-			tituloBloco.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));
-			
-			imputUsuario = new JPanel(new GridLayout(3,1));
-			imputsAmp = new JPanel (new BorderLayout());
-			imputsAng = new JPanel (new BorderLayout());
-			resposta = new JPanel(new BorderLayout());
-			JPanel botao = new JPanel(new FlowLayout());
-			JPanel amplitudeTxtP = new JPanel(new FlowLayout());
-			JPanel anguloTxtP = new JPanel(new FlowLayout());
-			
-			add(tituloBloco, BorderLayout.NORTH);
-			add(imputUsuario, BorderLayout.WEST);
-			add(resposta);
-			
-			amplitude = new JLabel("Amplitude ("+ simboloAmplitude +"): ");
-			amplitude.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
-			amplitudeTxt = new JTextField();
-			amplitudeTxt.setPreferredSize(new Dimension(100, 25));
-			amplitudeTxt.setAlignmentY(amplitude.getAlignmentY());
-			imputsAmp.add(amplitude, BorderLayout.NORTH);
-			amplitudeTxtP.add(amplitudeTxt);
-			imputsAmp.add(amplitudeTxtP);
-			imputsAmp.setBorder(new EmptyBorder(5, 5, 5, 5));
-			
-			angulo = new JLabel("Angulo de fase (0º): ");
-			angulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
-			anguloTxt = new JTextField();
-			anguloTxt.setPreferredSize(new Dimension(100, 25));
-			imputsAng.add(angulo, BorderLayout.NORTH);
-			anguloTxtP.add(anguloTxt);
-			imputsAng.add(anguloTxtP);
-			imputsAng.setBorder(new EmptyBorder(5, 5, 5, 5));
-						
-			simular = new JButton("Simular Forma de Onda");
-			simular.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
-			simular.setPreferredSize(new Dimension(200, 25));	
-			botao.add(simular);
-
-			simular.setActionCommand(titulo);
-			simular.addActionListener(new AcoesSimulacao1(this, simulacao));
-			
-			imputUsuario.add(imputsAmp);
-			imputUsuario.add(imputsAng);
-			imputUsuario.add(botao);
-			
-			tituloGrafico = new JLabel("Forma de Onda da " + titulo + ":");
-			tituloGrafico.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
-			
-			pontos = new ArrayList<Double>();
-			pontos.add(0.0);
-			
-			switch (titulo) {
-				case TENSAO:
-					grafico = new GraphPanel(220.0, -220.0, pontos);
-					break;
-				case CORRENTE:
-					grafico = new GraphPanel(100.0, -100.0, pontos);
-					break;
-			}	
-			
-			grafico.setPreferredSize(new Dimension(200,200));
-			
-			resposta.add(tituloGrafico, BorderLayout.NORTH);
-			resposta.setBorder(new EmptyBorder (10, 10, 10, 10));
-			resposta.add(grafico);
-		}
-
-		public String getAmplitudeTxt() {
-			return amplitudeTxt.getText();
-		}
-
-		public String getAnguloTxt() {
-			return anguloTxt.getText();
-		}
-		
-		public GraphPanel getGrafico() {
-			return grafico;
-		}
-	}
+//	public class Bloco extends JPanel{
+//		private JLabel tituloBloco, amplitude, angulo, tituloGrafico;
+//		private JTextField amplitudeTxt, anguloTxt;
+//		private JPanel imputUsuario, imputsAmp, imputsAng, resposta;
+//		private String titulo, simboloAmplitude;
+//		private JButton simular;
+//		private GraphPanel grafico;
+//		private Simulacao1 simulacao;
+//		private List<Double> pontos;
+//		
+//		public Bloco(String titulo, Simulacao1 simulacao){
+//				this.titulo = titulo;
+//				this.simulacao = simulacao;
+//				
+//				switch(titulo) {
+//				case TENSAO:
+//					simboloAmplitude = "VRMS";
+//					break;
+//				case CORRENTE:
+//					simboloAmplitude = "IRMS";
+//					break;
+//				}
+//				preparaGUI();
+//		}
+//		
+//		public void preparaGUI() {
+//			setPreferredSize(new Dimension(500, 300));
+//			setLayout(new BorderLayout(2,2));
+//			tituloBloco = new JLabel(titulo + ": ");
+//			tituloBloco.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));
+//			
+//			imputUsuario = new JPanel(new GridLayout(3,1));
+//			imputsAmp = new JPanel (new BorderLayout());
+//			imputsAng = new JPanel (new BorderLayout());
+//			resposta = new JPanel(new BorderLayout());
+//			JPanel botao = new JPanel(new FlowLayout());
+//			JPanel amplitudeTxtP = new JPanel(new FlowLayout());
+//			JPanel anguloTxtP = new JPanel(new FlowLayout());
+//			
+//			add(tituloBloco, BorderLayout.NORTH);
+//			add(imputUsuario, BorderLayout.WEST);
+//			add(resposta);
+//			
+//			amplitude = new JLabel("Amplitude ("+ simboloAmplitude +"): ");
+//			amplitude.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+//			amplitudeTxt = new JTextField();
+//			amplitudeTxt.setPreferredSize(new Dimension(100, 25));
+//			amplitudeTxt.setAlignmentY(amplitude.getAlignmentY());
+//			imputsAmp.add(amplitude, BorderLayout.NORTH);
+//			amplitudeTxtP.add(amplitudeTxt);
+//			imputsAmp.add(amplitudeTxtP);
+//			imputsAmp.setBorder(new EmptyBorder(5, 5, 5, 5));
+//			
+//			angulo = new JLabel("Angulo de fase (0º): ");
+//			angulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+//			anguloTxt = new JTextField();
+//			anguloTxt.setPreferredSize(new Dimension(100, 25));
+//			imputsAng.add(angulo, BorderLayout.NORTH);
+//			anguloTxtP.add(anguloTxt);
+//			imputsAng.add(anguloTxtP);
+//			imputsAng.setBorder(new EmptyBorder(5, 5, 5, 5));
+//						
+//			simular = new JButton("Simular Forma de Onda");
+//			simular.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+//			simular.setPreferredSize(new Dimension(200, 25));	
+//			botao.add(simular);
+//
+//			simular.setActionCommand(titulo);
+//			simular.addActionListener(new AcoesSimulacao1(this, simulacao));
+//			
+//			imputUsuario.add(imputsAmp);
+//			imputUsuario.add(imputsAng);
+//			imputUsuario.add(botao);
+//			
+//			tituloGrafico = new JLabel("Forma de Onda da " + titulo + ":");
+//			tituloGrafico.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
+//			
+//			pontos = new ArrayList<Double>();
+//			pontos.add(0.0);
+//			
+//			switch (titulo) {
+//				case TENSAO:
+//					grafico = new GraphPanel(220.0, -220.0, pontos);
+//					break;
+//				case CORRENTE:
+//					grafico = new GraphPanel(100.0, -100.0, pontos);
+//					break;
+//			}	
+//			
+//			grafico.setPreferredSize(new Dimension(200,200));
+//			
+//			resposta.add(tituloGrafico, BorderLayout.NORTH);
+//			resposta.setBorder(new EmptyBorder (10, 10, 10, 10));
+//			resposta.add(grafico);
+//		}
+//
+//		public String getAmplitudeTxt() {
+//			return amplitudeTxt.getText();
+//		}
+//
+//		public String getAnguloTxt() {
+//			return anguloTxt.getText();
+//		}
+//		
+//		public GraphPanel getGrafico() {
+//			return grafico;
+//		}
+//	}
 	
 	public class ResultadoPotencia extends JPanel{
 		private JLabel tituloResultado, potAtiva, potReativa, potAparente, fatPotencia, potGrafico, potTriangulo;

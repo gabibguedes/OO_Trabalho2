@@ -8,8 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.FluxoDePotenciaFundamental;
+import view.Bloco;
 import view.Simulacao1;
-import view.Simulacao1.Bloco;
+import view.Simulacao;
 import view.Tela;
 
 public class AcoesSimulacao1 implements ActionListener{
@@ -18,8 +19,8 @@ public class AcoesSimulacao1 implements ActionListener{
 	private double  angulo, amplitude;
 	private FluxoDePotenciaFundamental calculo;
 	
-	public AcoesSimulacao1(Bloco painel, Simulacao1 simulacao) {
-		this.painel = painel;
+	public AcoesSimulacao1(Bloco bloco, Simulacao1 simulacao) {
+		this.painel = bloco;
 		this.simulacao = simulacao;
 	}
 	

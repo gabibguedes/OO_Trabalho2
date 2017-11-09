@@ -31,12 +31,12 @@ public class FluxoDePotenciaFundamental {
 	}
 	
 	public double calcularPotAtiva() {
-		potAtiva = amplitudeTensao * amplitudeCorrente * Math.cos(anguloTensao - anguloCorrente);
+		potAtiva = amplitudeTensao * amplitudeCorrente * Math.cos(Math.toRadians(anguloTensao - anguloCorrente));
 		return potAtiva;
 	}
 	
 	public double calcularPotReativa() {
-		potReativa = amplitudeTensao * amplitudeCorrente * Math.sin(anguloTensao - anguloCorrente);
+		potReativa = amplitudeTensao * amplitudeCorrente * Math.sin(Math.toRadians(anguloTensao - anguloCorrente));
 		return potReativa;
 	}
 	
@@ -49,7 +49,7 @@ public class FluxoDePotenciaFundamental {
 		if(anguloTensao == anguloCorrente) {
 			fatPotencia = 1;
 		}else {
-			fatPotencia = Math.cos(anguloTensao - anguloCorrente);
+			fatPotencia = Math.cos(Math.toRadians(anguloTensao - anguloCorrente));
 		}
 		return fatPotencia;
 	}
