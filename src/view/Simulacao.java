@@ -1,4 +1,4 @@
-package src.view;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import src.controllers.MudarTela;
+import controllers.MudarTela;
 
 public class Simulacao extends Tela{
 

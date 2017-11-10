@@ -1,4 +1,4 @@
-package src.model;
+package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

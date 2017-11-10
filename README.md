@@ -1,4 +1,12 @@
-# Aqui deve conter todas as intruções de uso do seu software.
+# Aprenda QEE
 
-* Manual do usuário;
-* Quais pontos dos critérios de aceitação foram implementados;
+Para executar o programa, após o download abra a pasta ep2 no terminal e execute os seguintes comandos:
+
+* Linux:
+
+    >cd src  
+    javac view/Main.java  
+    java view/Main  
+
+
+

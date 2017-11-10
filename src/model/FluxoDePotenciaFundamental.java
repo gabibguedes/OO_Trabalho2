@@ -1,14 +1,14 @@
-package src.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FluxoDePotenciaFundamental {
-	double amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
-	double potAtiva, potReativa, potAparente, fatPotencia;
-	List<Double> pontosGrafico, pontosTensao, pontosCorrente;
+	private double amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
+	private double potAtiva, potReativa, potAparente, fatPotencia;
+	private List<Double> pontosGrafico, pontosTensao, pontosCorrente;
 	
-	final double freqAng = 120 * Math.PI;
+	public final double FREQANGULAR = 120 * Math.PI;
 	
 	public FluxoDePotenciaFundamental() {}
 	
@@ -18,31 +18,6 @@ public class FluxoDePotenciaFundamental {
 		this.amplitudeCorrente = amplitudeCorrente;
 		this.anguloTensao = anguloTensao;
 		this.anguloCorrente = anguloCorrente;
-		
-	}
-	
-	public List<Double> getPontosGrafico() {
-		return pontosGrafico;
-	}
-
-	public void setAmplitudeTensao(double amplitudeTensao) {
-		this.amplitudeTensao = amplitudeTensao;
-	}
-
-	public void setAmplitudeCorrente(double amplitudeCorrente) {
-		this.amplitudeCorrente = amplitudeCorrente;
-	}
-
-	public void setAnguloTensao(double anguloTensao) {
-		this.anguloTensao = anguloTensao;
-	}
-
-	public void setAnguloCorrente(double anguloCorrente) {
-		this.anguloCorrente = anguloCorrente;
-	}
-
-	public void setPontosGrafico(List<Double> pontosGrafico) {
-		this.pontosGrafico = pontosGrafico;
 	}
 
 	public void setTensao(double amplitudeTensao, double anguloTensao) {
@@ -56,12 +31,12 @@ public class FluxoDePotenciaFundamental {
 	}
 	
 	public double calcularPotAtiva() {
-		potAtiva = amplitudeTensao * amplitudeCorrente * Math.cos(anguloTensao - anguloCorrente);
+		potAtiva = amplitudeTensao * amplitudeCorrente * Math.cos(Math.toRadians(anguloTensao - anguloCorrente));
 		return potAtiva;
 	}
 	
 	public double calcularPotReativa() {
-		potReativa = amplitudeTensao * amplitudeCorrente * Math.sin(anguloTensao - anguloCorrente);
+		potReativa = amplitudeTensao * amplitudeCorrente * Math.sin(Math.toRadians(anguloTensao - anguloCorrente));
 		return potReativa;
 	}
 	
@@ -74,7 +49,7 @@ public class FluxoDePotenciaFundamental {
 		if(anguloTensao == anguloCorrente) {
 			fatPotencia = 1;
 		}else {
-			fatPotencia = Math.cos(anguloTensao - anguloCorrente);
+			fatPotencia = Math.cos(Math.toRadians(anguloTensao - anguloCorrente));
 		}
 		return fatPotencia;
 	}
@@ -105,7 +80,7 @@ public class FluxoDePotenciaFundamental {
 		double ponto;
 		pontosGrafico = new ArrayList<>();
 		
-		for(double t = 0; t<200; t++) {
+		for(double t = 0; t<100; t++) {
 			ponto = v(t) * i(t);
 			pontosGrafico.add(ponto);
 		}
@@ -114,13 +89,13 @@ public class FluxoDePotenciaFundamental {
 	
 	private double v(double x) {
 		double v;
-		v = amplitudeTensao * Math.cos(Math.toRadians((freqAng * x) + anguloTensao));
+		v = amplitudeTensao * Math.cos(Math.toRadians((FREQANGULAR * x) + anguloTensao));
 		return v;
 	}
 	
 	private double i(double x) {
 		double i;
-		i = amplitudeCorrente * Math.cos(Math.toRadians((freqAng * x) + anguloCorrente));
+		i = amplitudeCorrente * Math.cos(Math.toRadians((FREQANGULAR * x) + anguloCorrente));
 		return i;
 	}
 }
