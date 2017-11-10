@@ -53,7 +53,7 @@ public class Bloco extends JPanel{
 	public Bloco(boolean ehHarmonico, String titulo, Simulacao2 simulacao2){
 		this.titulo = titulo;
 		this.simulacao2 = simulacao2;
-		tipo = Tela.SIMULACAO1;
+		tipo = Tela.SIMULACAO2;
 		this.ehHarmonico = ehHarmonico;
 		simboloAmplitude = "";
 		preparaGUI();
@@ -145,14 +145,19 @@ public class Bloco extends JPanel{
 		pontos = new ArrayList<Double>();
 		pontos.add(0.0);
 		
-		switch (titulo) {
-			case Simulacao1.TENSAO:
-				grafico = new GraphPanel(220.0, -220.0, pontos);
-				break;
-			case Simulacao1.CORRENTE:
-				grafico = new GraphPanel(100.0, -100.0, pontos);
-				break;
-		}	
+		if(tipo == Tela.SIMULACAO1) {
+			switch (titulo) {
+				case Simulacao1.TENSAO:
+					grafico = new GraphPanel(220.0, -220.0, pontos);
+					break;
+				case Simulacao1.CORRENTE:
+					grafico = new GraphPanel(100.0, -100.0, pontos);
+					break;
+			}			
+		}else {
+			grafico = new GraphPanel(pontos);
+		}
+			
 		
 		grafico.setPreferredSize(new Dimension(200,200));
 			
