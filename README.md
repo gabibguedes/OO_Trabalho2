@@ -4,14 +4,9 @@ Para executar o programa, após o download abra a pasta ep2 no terminal e execut
 
 * Linux:
 
-    > cd src  
-    javac view/Main.java  
-    java view/Main  
+    >$ cd src  
+    $ javac view/Main.java  
+    $ java view/Main  
 
 
-* Windows:
-
-	> cd src  
-	javac view\Main.java  
-	java view\Main  
 
