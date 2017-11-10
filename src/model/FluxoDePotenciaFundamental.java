@@ -8,7 +8,7 @@ public class FluxoDePotenciaFundamental {
 	private double potAtiva, potReativa, potAparente, fatPotencia;
 	private List<Double> pontosGrafico, pontosTensao, pontosCorrente;
 	
-	private final double freqAng = 120 * Math.PI;
+	public final double FREQANGULAR = 120 * Math.PI;
 	
 	public FluxoDePotenciaFundamental() {}
 	
@@ -89,13 +89,13 @@ public class FluxoDePotenciaFundamental {
 	
 	private double v(double x) {
 		double v;
-		v = amplitudeTensao * Math.cos(Math.toRadians((freqAng * x) + anguloTensao));
+		v = amplitudeTensao * Math.cos(Math.toRadians((FREQANGULAR * x) + anguloTensao));
 		return v;
 	}
 	
 	private double i(double x) {
 		double i;
-		i = amplitudeCorrente * Math.cos(Math.toRadians((freqAng * x) + anguloCorrente));
+		i = amplitudeCorrente * Math.cos(Math.toRadians((FREQANGULAR * x) + anguloCorrente));
 		return i;
 	}
 }
