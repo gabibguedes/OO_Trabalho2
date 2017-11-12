@@ -86,7 +86,8 @@ public class AcoesSimulacao2 implements ActionListener{
 					painel.getGrafico().setScores(calculo.calcularOndaCFundamental());
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da Componente Fundamental deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
+					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude da Componente "
+							+ "Fundamental deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
 				}
 				break;
 			case Tela.SIMULACAO2:
@@ -104,7 +105,13 @@ public class AcoesSimulacao2 implements ActionListener{
 						if(amplitude < 0 || amplitude > 220) {
 							NumberFormatException e = new NumberFormatException();
 							throw e;
-						}						
+						}
+						
+						int resto = (int) (ordemHarmonica) % 2;
+						if((simulacao.getEhPar() && (resto != 0))||((!simulacao.getEhPar())&&(resto == 0))) {
+							NumberFormatException e = new NumberFormatException();
+							throw e;
+						}
 						
 						calculo.setHarmonico(i, angulo, amplitude, ordemHarmonica);
 						blocosHarmonicos.get(i).getGrafico().setScores(calculo.calcularOndaHarmonica(i));
@@ -154,9 +161,11 @@ public class AcoesSimulacao2 implements ActionListener{
 					}
 					
 					simulacao.getFormula().setText(formula);
+					
 				}
 				catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
+					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude deve ser entre 0 ≤ VRMS ≤ 220,"
+							+ "\no angulo deve estar em graus e a ordem deve\nestar de acordo com a paridade pré-definida.");
 				}
 				break;
 		}

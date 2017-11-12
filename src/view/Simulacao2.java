@@ -27,13 +27,11 @@ import view.Simulacao1.ResultadoPotencia;
 public class Simulacao2 extends Simulacao{
 	
 	public final static String COMPFUND = "Componente Fundamental";
-	public final static String HARMONICOS = "Harmonicos";
+	public final static String HARMONICOS = "Harmônicos";
 	private Bloco compFund;
 	private Harmonicos harmonicos;
 	private Resultado resultado;
-	private JScrollPane scroll;
 	private boolean ehPar = true;
-	private GraphPanel grafico;
 	
 	public Simulacao2(JFrame janela) throws IOException {
 		super(janela);
@@ -65,8 +63,6 @@ public class Simulacao2 extends Simulacao{
 		
 		
 	}
-	
-
 	
 	public class Harmonicos extends JPanel{
 		Simulacao2 simulacao;
@@ -120,7 +116,7 @@ public class Simulacao2 extends Simulacao{
 			par.setSelected(ehPar);
 			imputsParImpar.add(par);
 			
-			impar = new JRadioButton("Impares");
+			impar = new JRadioButton("Ímpares");
 			impar.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			impar.setActionCommand("impar");
 			impar.addActionListener(new AcoesSimulacao2(simulacao, this));
@@ -220,7 +216,7 @@ public class Simulacao2 extends Simulacao{
 			List<Double> pontos = new ArrayList<>();
 			pontos.add(0.0);
 			
-			onda = new JLabel("Grafico Resultante:");
+			onda = new JLabel("Gráfico Resultante:");
 			onda.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			graficoPanel.add(onda, BorderLayout.NORTH);
 			graficoPanel.setBorder(new EmptyBorder(5,5,5,5));
@@ -229,11 +225,11 @@ public class Simulacao2 extends Simulacao{
 			grafico.setPreferredSize(new Dimension(400,150));
 			graficoPanel.add(grafico);
 			
-			tituloFormula = new JLabel("Serie de Fourier Amplitude-Fase:");
+			tituloFormula = new JLabel("Série de Fourier Amplitude-Fase:");
 			tituloFormula.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			formulaPanel.add(tituloFormula);
 			
-			formula = new JLabel("");
+			formula = new JLabel("f(t) = ");
 			formula.setFont(new Font(FONTE, Font.BOLD, TAMANHO_TEXTO));
 			formulaPanel.add(formula);
 		}

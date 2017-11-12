@@ -10,7 +10,7 @@ public class Tela {
 	public static final String TITULO = "Aprenda QEE";
 	public static final String MENU = "Menu Inicial";
 	public static final String SIMULACAO1 = "Simular Fluxo de Potência Fundamental";
-	public static final String SIMULACAO2 = "Simular Distorção Harmonica";
+	public static final String SIMULACAO2 = "Simular Distorção Harmônica";
 	
 	public static final String FONTE = "Dialog";
 	public static final int TAMANHO_TITULO = 40;
