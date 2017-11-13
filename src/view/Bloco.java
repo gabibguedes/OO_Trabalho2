@@ -208,4 +208,19 @@ public class Bloco extends JPanel{
 	public void setEhHarmonico(boolean ehHarmonico) {
 		this.ehHarmonico = ehHarmonico;
 	}
+	public boolean getEhHarmonico() {
+		return ehHarmonico;
+	}
+	public void setEhPar(boolean ehPar) {
+		this.ehPar = ehPar;
+	}
+	public boolean getEhPar() {
+		return ehPar;
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public Simulacao2 getSimulacao2() {
+		return simulacao2;
+	}
 }

@@ -101,6 +101,20 @@ public class AcoesSimulacao1 implements ActionListener{
 					simulacao.getBlocoCorrente().getGrafico().setScores(calculo.calcularOndaCorrente());
 					simulacao.getResultadoPotencia().getGrafico().setScores(calculo.calcularOnda());
 					
+					double x = calculo.calcularPotAtiva();
+					double y = calculo.calcularPotReativa();
+					
+					if(x>5000 || y>5000 || x< -5000|| y< -5000) {
+						simulacao.getResultadoPotencia().getTriangulo().setScores(x/250, y/250);
+					}
+					else if(x>1000 || y>1000 || x< -1000|| y< -1000) {
+						simulacao.getResultadoPotencia().getTriangulo().setScores(x/100, y/100);
+					}else if(x>500 || y>500 || x< -500|| y< -500){
+						simulacao.getResultadoPotencia().getTriangulo().setScores(x/10 , y/10);
+					}else {
+						simulacao.getResultadoPotencia().getTriangulo().setScores(x/5 , y/5);
+					}
+					
 				}catch(NumberFormatException e) {
 					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da tensão deve ser entre 0 ≤ VRMS ≤ 220, \nda corrente entre 0 ≤ IRMS ≤ 100 e o angulo deve estar\nem graus.");
 				}

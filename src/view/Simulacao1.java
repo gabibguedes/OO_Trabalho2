@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -53,18 +54,21 @@ public class Simulacao1 extends Simulacao{
 		simulacaoPane.add(tensao);
 		simulacaoPane.add(corrente);
 		simulacaoPane.add(resultado);
+		
 	}
 	
 	public void mostrarTela() {		
 		janela.setVisible(true);
 		contentPane.setVisible(true);
+
 	}
 	
 	public class ResultadoPotencia extends JPanel{
 		private JLabel tituloResultado, potAtiva, potReativa, potAparente, fatPotencia, potGrafico, potTriangulo;
 		private JLabel potAtivaValor, potReativaValor, potAparenteValor, fatPotenciaValor;
 		private JPanel painel, valores, graficos;
-		private GraphPanel grafico, triangulo;
+		private GraphPanel grafico;
+		Triangulo triangulo;
 		private List<Double> pontos;
 
 		private ResultadoPotencia() {
@@ -130,21 +134,23 @@ public class Simulacao1 extends Simulacao{
 			pontos.add(0.0);
 			
 			grafico = new GraphPanel(pontos);
-			grafico.setPreferredSize(new Dimension(100,100));
+			grafico.setPreferredSize(new Dimension(120,120));
 			
 			graficoOnda.add(potGrafico, BorderLayout.NORTH);
 			graficoOnda.add(grafico);
 			graficoOnda.setBorder(new EmptyBorder (10, 10, 10, 10));
 			graficos.add(graficoOnda);
 			
-			triangulo = new GraphPanel(pontos);
+			triangulo = new Triangulo(0,0);
 			triangulo.setPreferredSize(new Dimension(100,100));
 			
 			graficoTriangulo.add(potTriangulo, BorderLayout.NORTH);
-			graficoTriangulo.add(triangulo);
+			JPanel trianguloPane = new JPanel(new FlowLayout());
+			trianguloPane.add(triangulo);
+			graficoTriangulo.add(trianguloPane);
 			graficoTriangulo.setBorder(new EmptyBorder (10, 10, 10, 10));
-			graficos.add(graficoTriangulo, BorderLayout.EAST);
-				
+			
+			graficos.add(graficoTriangulo, BorderLayout.EAST);	
 		}
 		
 
@@ -166,6 +172,10 @@ public class Simulacao1 extends Simulacao{
 		
 		public GraphPanel getGrafico() {
 			return grafico;
+		}
+		
+		public Triangulo getTriangulo() {
+			return triangulo;
 		}
 	}
 	
