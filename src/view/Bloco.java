@@ -139,9 +139,9 @@ public class Bloco extends JPanel{
 		if(ehHarmonico) {
 			SpinnerModel sm;
 			if(ehPar) {
-				sm = new SpinnerNumberModel(2, 2, 8, 2);
+				sm = new SpinnerNumberModel(2, 2, 14, 2);
 			}else {
-				sm = new SpinnerNumberModel(1, 1, 9, 2);
+				sm = new SpinnerNumberModel(1, 1, 15, 2);
 			}
 			imputsOrdemH = new JPanel (new BorderLayout());
 			

@@ -54,6 +54,11 @@ public class AcoesSimulacao2 implements ActionListener{
 				try {
 					numOH = Integer.parseInt(harmonicos.getNumOH().getValue().toString());
 					
+					if((!harmonicos.getRadioButtonImpar().isSelected())&&(!harmonicos.getRadioButtonPar().isSelected())) {
+						NullPointerException e = new NullPointerException();
+						throw e;
+					}
+					
 					//A partir do número de harmonicos (numOH) um for é feito para
 					//criar a quantidade solicitada de blocos e coloca-los em uma 
 					//lista.
@@ -66,7 +71,7 @@ public class AcoesSimulacao2 implements ActionListener{
 					//esses elementos na tela.
 					harmonicos.setNovaListaHarmonicos(listaHarmonicos);
 				}catch(NullPointerException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Número de Ordens Harmônicas inválido.");
+					JOptionPane.showMessageDialog(null,"ERRO: Escolha entre Harmônicos Par ou Ímpar.");
 				}
 				break;
 				
@@ -100,6 +105,11 @@ public class AcoesSimulacao2 implements ActionListener{
 						throw e;
 					}
 					
+					if(angulo < -180 || angulo > 180) {
+						NumberFormatException e = new NumberFormatException();
+						throw e;
+					}
+					
 					//A classe de calculos é instanciada
 					calculo = new DistorcaoHarmonica();
 					calculo.setComponenteFundamental(amplitude, angulo);
@@ -109,7 +119,8 @@ public class AcoesSimulacao2 implements ActionListener{
 					
 				}catch(NumberFormatException e) {
 					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude da Componente "
-							+ "Fundamental deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
+							+ "Fundamental deve ser entre 0 e 220 \ne o angulo deve estar entre -180° e +180°"
+							+ " graus.");
 				}
 				break;
 				
@@ -121,8 +132,10 @@ public class AcoesSimulacao2 implements ActionListener{
 				calculo = new DistorcaoHarmonica();
 				List<Bloco> blocosHarmonicos = new ArrayList<>();
 				blocosHarmonicos = simulacao.getHarmonicos().getListaHarmonicos();
+				
 					
 				try {
+					
 					for(int i=0; i<blocosHarmonicos.size(); i++) {
 						//Variaveis são estabelecidas e verificadas se estão de 
 						//acordo com o padrão exigido
@@ -132,6 +145,11 @@ public class AcoesSimulacao2 implements ActionListener{
 						ordemHarmonica = Double.parseDouble(blocosHarmonicos.get(i).getOrdemHarmonicaTxt());
 
 						if(amplitude < 0 || amplitude > 220) {
+							NumberFormatException e = new NumberFormatException();
+							throw e;
+						}
+						
+						if(angulo < -180 || angulo > 180) {
 							NumberFormatException e = new NumberFormatException();
 							throw e;
 						}
@@ -152,7 +170,12 @@ public class AcoesSimulacao2 implements ActionListener{
 					amplitudeCF = Double.parseDouble(simulacao.getComponenteFundamental().getAmplitudeTxt());
 					anguloCF = Double.parseDouble(simulacao.getComponenteFundamental().getAnguloTxt());
 
-					if(amplitude < 0 || amplitude > 220) {
+					if(amplitudeCF < 0 || amplitudeCF > 220) {
+						NumberFormatException e = new NumberFormatException();
+						throw e;
+					}
+					
+					if(anguloCF < -180 || anguloCF > 180) {
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
@@ -203,8 +226,9 @@ public class AcoesSimulacao2 implements ActionListener{
 					
 				}
 				catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude deve ser entre 0 ≤ VRMS ≤ 220,"
-							+ "\no angulo deve estar em graus e a ordem deve\nestar de acordo com a paridade pré-definida.");
+					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude deve ser entre 0 e 220,\n"
+							+ "o angulo deve estar entre -180° e +180° e a ordem deve\nestar de acordo com a paridade "
+							+ "pré-definida.");
 				}
 				break;
 		}

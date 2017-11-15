@@ -49,15 +49,20 @@ public class AcoesSimulacao1 implements ActionListener{
 						throw e;
 					}
 					
+					if(angulo < -180 || angulo > 180) {
+						NumberFormatException e = new NumberFormatException();
+						throw e;
+					}
+					
 					calculo = new FluxoDePotenciaFundamental();
 					calculo.setTensao(amplitude, angulo);
 					
 					painel.getGrafico().setScores(calculo.calcularOndaTensao());
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da tensão deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
+					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude da Tensão "
+							+ " deve ser entre 0 e 220 \ne o angulo deve estar entre -180° e +180° graus.");
 				}
-				
 				break;
 				
 			case Simulacao1.CORRENTE:
@@ -71,13 +76,19 @@ public class AcoesSimulacao1 implements ActionListener{
 						throw e;
 					}
 					
+					if(angulo < -180 || angulo > 180) {
+						NumberFormatException e = new NumberFormatException();
+						throw e;
+					}
+					
 					calculo = new FluxoDePotenciaFundamental();
 					calculo.setCorrente(amplitude, angulo);
 					
 					painel.getGrafico().setScores(calculo.calcularOndaCorrente());
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da corrente deve ser entre 0 ≤ IRMS ≤ 100 \ne o angulo deve estar em graus.");
+					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude da Corrente "
+							+ "deve ser entre 0 e 220 \ne o angulo deve estar entre -180° e +180° graus.");
 				}
 				
 				break;
@@ -97,6 +108,12 @@ public class AcoesSimulacao1 implements ActionListener{
 					
 					if(amplitudeCorrente < 0 || amplitudeCorrente > 100
 							|| amplitudeTensao < 0 || amplitudeTensao > 220) {
+						NumberFormatException e = new NumberFormatException();
+						throw e;
+					}
+					
+					if(anguloTensao < -180 || anguloTensao > 180 || 
+							anguloCorrente < -180 || anguloCorrente > 180) {
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
@@ -133,7 +150,9 @@ public class AcoesSimulacao1 implements ActionListener{
 					}
 					
 				}catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"ERRO: Numero invalido!\n\nA amplitude da tensão deve ser entre 0 ≤ VRMS ≤ 220, \nda corrente entre 0 ≤ IRMS ≤ 100 e o angulo deve estar\nem graus.");
+					JOptionPane.showMessageDialog(null,"ERRO: Número inválido!\n\nA amplitude "
+							+ "da Tensão deve ser entre 0 e\n220,da Corrente, entre 0 e 220 "
+							+ "e o angulo\ndeve estar entre -180° e +180° graus.");
 				}
 				
 				break;

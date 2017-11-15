@@ -62,7 +62,7 @@ public class Triangulo extends JPanel {
     	g2.setColor(blue);
     	g2.setStroke(GRAPH_STROKE);
     	g2.drawLine(TAMANHO/2, TAMANHO/2, (int) (coordenadaX+TAMANHO/2), (int) ((-coordenadaY+TAMANHO/2)));
-    	g2.setColor(black);
+    	g2.setColor(green);
     	g2.drawLine((int) (coordenadaX+TAMANHO/2), (int) ((-coordenadaY+TAMANHO/2)), (int) (coordenadaX+TAMANHO/2),TAMANHO/2);
     	g2.setColor(RED);
     	g2.drawLine((int) (coordenadaX+TAMANHO/2), TAMANHO/2,TAMANHO/2, TAMANHO/2);

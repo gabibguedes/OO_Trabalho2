@@ -112,7 +112,7 @@ public class Simulacao2 extends Tela implements Simulacao{
 			numOH.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			imputsNumOH.add(numOH);
 			
-			SpinnerModel sm = new SpinnerNumberModel(1, 1, 9, 1);
+			SpinnerModel sm = new SpinnerNumberModel(0, 0, 6, 1);
 			
 			numOHTxt = new JSpinner(sm);
 			numOHTxt.setPreferredSize(new Dimension(50, 25));
@@ -130,7 +130,6 @@ public class Simulacao2 extends Tela implements Simulacao{
 			par.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_TEXTO));
 			par.setActionCommand("par");
 			par.addActionListener(new AcoesSimulacao2(simulacao, this));
-			par.setSelected(ehPar);
 			imputsParImpar.add(par);
 			
 			impar = new JRadioButton("Ímpares");
@@ -148,12 +147,9 @@ public class Simulacao2 extends Tela implements Simulacao{
 			enter.addActionListener(new AcoesSimulacao2(simulacao, this));
 			imputsUsuario.add(enter);
 			
-			//Harmonicos: Inicialmente a tela está com 1 harmonico par
+			//Harmonicos:
 			listaHarmonicos = new ArrayList<>();
 			blocosHarmonicos = new JScrollPane();
-			Bloco blocoInicial = new Bloco(true, ehPar, "1", simulacao);
-			listaHarmonicos.add(blocoInicial);
-			blocosHarmonicos.setViewportView(blocoInicial);
 			add(blocosHarmonicos);
 		}
 		
@@ -189,9 +185,9 @@ public class Simulacao2 extends Tela implements Simulacao{
 				
 				//O painel criado é então colocado no JScrollPane
 				blocosHarmonicos.setViewportView(harmonicos);
-				
 			}
 		}
+		
 		public List<Bloco> getListaHarmonicos(){
 			return listaHarmonicos;
 		}

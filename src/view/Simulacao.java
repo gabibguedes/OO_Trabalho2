@@ -47,7 +47,7 @@ public interface Simulacao{
 		//3a parte = botões para voltar ao menu e para realizar a simulação
 		botoes.setLayout(new FlowLayout());
 		
-		voltar.setText("Voltar ao Menu Principal");
+		voltar.setText("Voltar ao " + Tela.MENU);
 		voltar.setFont(new Font(Tela.FONTE, Font.BOLD, Tela.TAMANHO_TEXTO));
 		voltar.setPreferredSize(new Dimension(250, 25));
 		
