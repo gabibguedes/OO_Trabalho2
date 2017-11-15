@@ -25,8 +25,8 @@ public class DistorcaoHarmonica {
 	public void setHarmonico(int i, double angulo, double amplitude, double ordemHarmonica) {
 		//Metodo para acrescentar um novo harmonico na lista a partir
 		//de suas variaveis
-		HarmonicoDados harmonicosI = new HarmonicoDados(angulo, amplitude, ordemHarmonica);
-		harmonicos.add(i, harmonicosI);
+		HarmonicoDados harmonicoI = new HarmonicoDados(angulo, amplitude, ordemHarmonica);
+		harmonicos.add(i, harmonicoI);
 	}
 	
 	//Métodos para os calculos dos pontos das ondas:
