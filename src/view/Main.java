@@ -6,7 +6,10 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 public class Main {
-
+	
+	//Classe que da início a aplicação. Onde ocorre a criação do
+	//JFrame janela que será usado em todo o programa.
+	
 	public static void main(String[] args) {
 		JFrame janelaPrincipal = new JFrame();
 		try {

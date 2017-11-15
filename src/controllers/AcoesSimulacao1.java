@@ -14,6 +14,7 @@ import view.Simulacao;
 import view.Tela;
 
 public class AcoesSimulacao1 implements ActionListener{
+	//Classe para ser usada como o ButtonClickListener da Simulação1
 	private Bloco painel;
 	private Simulacao1 simulacao;
 	private double  angulo, amplitude;
@@ -31,9 +32,14 @@ public class AcoesSimulacao1 implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		String comando = evento.getActionCommand();
+		//O comando definido no ActionCommand escolhe a ação a ser realizada.
+		
+		//Os metodos try catch utilizados garantem que os valores estão dentro
+		//dos padrões estabelacidos
 		
 		switch (comando){
 			case Simulacao1.TENSAO:
+				//Calcula a onda do bloco Tensão
 				try {
 					amplitude = Double.parseDouble(painel.getAmplitudeTxt());
 					angulo = Double.parseDouble(painel.getAnguloTxt());
@@ -55,6 +61,7 @@ public class AcoesSimulacao1 implements ActionListener{
 				break;
 				
 			case Simulacao1.CORRENTE:
+				//Calcula a onda do bloco Corrente
 				try {
 					amplitude = Double.parseDouble(painel.getAmplitudeTxt());
 					angulo = Double.parseDouble(painel.getAnguloTxt());
@@ -76,6 +83,9 @@ public class AcoesSimulacao1 implements ActionListener{
 				break;
 				
 			case Tela.SIMULACAO1:
+				//Calcula as ondas dos blocos Tensão e Corrente, além de calcular os resultados númericos
+				//e os gráficos resultantes
+				
 				try {
 					double  amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
 					
@@ -90,21 +100,28 @@ public class AcoesSimulacao1 implements ActionListener{
 						NumberFormatException e = new NumberFormatException();
 						throw e;
 					}
-
+					
+					//Calcula os resultados númericos
 					calculo = new FluxoDePotenciaFundamental(amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente);
 					simulacao.getResultadoPotencia().setPotAtivaValor(calculo.calcularPotAtiva());
 					simulacao.getResultadoPotencia().setPotReativaValor(calculo.calcularPotReativa());
 					simulacao.getResultadoPotencia().setPotAparenteValor(calculo.calcularPotAparente());
 					simulacao.getResultadoPotencia().setFatPotenciaValor(calculo.calcularFatPotencia());
 					
+					//Calcula as ondas de Tensão, Corrente e Resultante
 					simulacao.getBlocoTensao().getGrafico().setScores(calculo.calcularOndaTensao());
 					simulacao.getBlocoCorrente().getGrafico().setScores(calculo.calcularOndaCorrente());
 					simulacao.getResultadoPotencia().getGrafico().setScores(calculo.calcularOnda());
 					
+					//Calcula o triangulo de potência
 					double x = calculo.calcularPotAtiva();
 					double y = calculo.calcularPotReativa();
 					
-					if(x>5000 || y>5000 || x< -5000|| y< -5000) {
+					//Limites estabelecidos e valores divididos para que as linhas fiquem dentro
+					//do painel do grafico
+					if(x>10000 || y>10000 || x < -10000|| y< -10000) {
+						simulacao.getResultadoPotencia().getTriangulo().setScores(x/1000, y/1000);
+					}else if(x>5000 || y>5000 || x< -5000|| y< -5000) {
 						simulacao.getResultadoPotencia().getTriangulo().setScores(x/250, y/250);
 					}
 					else if(x>1000 || y>1000 || x< -1000|| y< -1000) {

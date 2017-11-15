@@ -18,6 +18,7 @@ import view.Simulacao2.Harmonicos;
 import view.Tela;
 
 public class AcoesSimulacao2 implements ActionListener{
+	//Classe utilizada para ActionListener da Simulação2
 	private Bloco painel;
 	private Simulacao2 simulacao;
 	private double  angulo, amplitude, ordemHarmonica, anguloCF, amplitudeCF;
@@ -43,35 +44,54 @@ public class AcoesSimulacao2 implements ActionListener{
 		String comando = evento.getActionCommand();
 		switch(comando) {
 			case Simulacao2.HARMONICOS:
+				//Esta ação será executada nos casos em que o usuário clica
+				//no botão OK após ter selecionado a quantidade e a paridade
+				//dos harmonicos a serem executados.
 				int numOH;
 				List<Bloco> listaHarmonicos;
 				listaHarmonicos = new ArrayList<>();
 				
 				try {
 					numOH = Integer.parseInt(harmonicos.getNumOH().getValue().toString());
+					
+					//A partir do número de harmonicos (numOH) um for é feito para
+					//criar a quantidade solicitada de blocos e coloca-los em uma 
+					//lista.
+					for(int i = 0; i < numOH; i++) {
+						Bloco harmonico = new Bloco(true, simulacao.getEhPar(),Integer.toString(i+1), simulacao);
+						listaHarmonicos.add(harmonico);
+					}
+					
+					//Após a lista ser formada ela vai para um método que colocará
+					//esses elementos na tela.
+					harmonicos.setNovaListaHarmonicos(listaHarmonicos);
 				}catch(NullPointerException e) {
-					numOH = 0;
+					JOptionPane.showMessageDialog(null,"ERRO: Número de Ordens Harmônicas inválido.");
 				}
-				
-				for(int i = 0; i < numOH; i++) {
-					Bloco harmonico = new Bloco(simulacao.getEhPar(),Integer.toString(i+1), simulacao);
-					listaHarmonicos.add(harmonico);
-				}
-				harmonicos.setNovaListaHarmonicos(listaHarmonicos);
-
 				break;
+				
 			case "impar":
+				//Esta ação é chamada ao clicar no RadioButton ímpar, ela
+				//desceleciona o Radiobutton par caso esteja selecionado
+				//e atualiza a variavel para controlar a paridade
+				
 				harmonicos.getRadioButtonImpar().setSelected(true);
 				harmonicos.getRadioButtonPar().setSelected(false);
 				simulacao.setEhPar(false);
 				break;
+				
 			case "par":
+				//Assim como na ação anterior, esta descelaciona o outro
+				//RadioButton e atualiza a variavel de controle de paridade
+				
 				harmonicos.getRadioButtonPar().setSelected(true);
 				harmonicos.getRadioButtonImpar().setSelected(false);
 				simulacao.setEhPar(true);
 				break;
+				
 			case Simulacao2.COMPFUND:
 				try {
+					//Esta ação atualiza o gráfico do Bloco Componente Fundamental
 					amplitude = Double.parseDouble(painel.getAmplitudeTxt());
 					angulo = Double.parseDouble(painel.getAnguloTxt());
 
@@ -80,9 +100,11 @@ public class AcoesSimulacao2 implements ActionListener{
 						throw e;
 					}
 					
+					//A classe de calculos é instanciada
 					calculo = new DistorcaoHarmonica();
 					calculo.setComponenteFundamental(amplitude, angulo);
 					
+					//Os calculos são feitos e colocados no gráfico
 					painel.getGrafico().setScores(calculo.calcularOndaCFundamental());
 					
 				}catch(NumberFormatException e) {
@@ -90,14 +112,21 @@ public class AcoesSimulacao2 implements ActionListener{
 							+ "Fundamental deve ser entre 0 ≤ VRMS ≤ 220 \ne o angulo deve estar em graus.");
 				}
 				break;
+				
 			case Tela.SIMULACAO2:
+				//Esta ação atualiza os gráficos de Componente fundamental, 
+				//dos Harmonicos e o gráfico resultante, além de estruturar
+				//a String da formula
+				
 				calculo = new DistorcaoHarmonica();
 				List<Bloco> blocosHarmonicos = new ArrayList<>();
 				blocosHarmonicos = simulacao.getHarmonicos().getListaHarmonicos();
-				
 					
 				try {
 					for(int i=0; i<blocosHarmonicos.size(); i++) {
+						//Variaveis são estabelecidas e verificadas se estão de 
+						//acordo com o padrão exigido
+						
 						amplitude = Double.parseDouble(blocosHarmonicos.get(i).getAmplitudeTxt());
 						angulo = Double.parseDouble(blocosHarmonicos.get(i).getAnguloTxt());
 						ordemHarmonica = Double.parseDouble(blocosHarmonicos.get(i).getOrdemHarmonicaTxt());
@@ -113,7 +142,9 @@ public class AcoesSimulacao2 implements ActionListener{
 							throw e;
 						}
 						
+						//A lista de harmonicos é passada para o calculo
 						calculo.setHarmonico(i, angulo, amplitude, ordemHarmonica);
+						//Os pontos da onda são calculados e o gráfico é atualizado
 						blocosHarmonicos.get(i).getGrafico().setScores(calculo.calcularOndaHarmonica(i));
 						simulacao.getHarmonicos().setListaHarmonicos(blocosHarmonicos);	
 					}
@@ -126,13 +157,19 @@ public class AcoesSimulacao2 implements ActionListener{
 						throw e;
 					}
 					
+					//Variaveis da Componente fundamental são passadas para o calculo
 					calculo = new DistorcaoHarmonica();
-					calculo.setComponenteFundamental(amplitude, angulo);
+					calculo.setComponenteFundamental(amplitudeCF, anguloCF);
 					
+					//Onda da Componente Fundamental calculada e gráfico atualizado
 					simulacao.getComponenteFundamental().getGrafico().setScores(calculo.calcularOndaCFundamental());
 					
+					//Calculo e atualização do gráfico resultante
 					simulacao.getGraficoResultante().setScores(calculo.calcularOndaResultado());
 					
+					//Formação da String da formula:
+					
+					//Componente Fundamental é passada para a String
 					String amplitudeStr, anguloStr;
 					if(anguloCF>=0) {
 						anguloStr = "+ "+ anguloCF;
@@ -141,6 +178,7 @@ public class AcoesSimulacao2 implements ActionListener{
 					}
 					formula = "f(t) = " + amplitudeCF + " cos(ωt "+anguloStr+"°) ";
 					
+					//Harmonicos são passados para a string:
 					for(int i=0; i<simulacao.getHarmonicos().getListaHarmonicos().size(); i++) {
 						amplitude = Double.parseDouble(blocosHarmonicos.get(i).getAmplitudeTxt());
 						angulo = Double.parseDouble(blocosHarmonicos.get(i).getAnguloTxt());
@@ -160,6 +198,7 @@ public class AcoesSimulacao2 implements ActionListener{
 						formula += amplitudeStr + " cos("+ ordemHarmonica +" ωt "+ anguloStr+"°) ";
 					}
 					
+					//String de formula inserida na tela
 					simulacao.getFormula().setText(formula);
 					
 				}

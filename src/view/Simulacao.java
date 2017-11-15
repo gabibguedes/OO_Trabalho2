@@ -15,45 +15,66 @@ import javax.swing.border.EmptyBorder;
 
 import controllers.MudarTela;
 
-public class Simulacao extends Tela{
+public interface Simulacao{
+	//Essa interface foi criada para ser utilizada nas simulações
+	//ela define a organização inicial dessas classes pelo metodo
+	//preparaSimulação(), dessa forma todas as simulações ficam 
+	//com um aspecto parecido (titulo, simulações, botoes voltar 
+	//e simular).
 
-	protected JLabel titulo;
-	protected JPanel topoPagina, simulacaoPane, botoes;
-	protected JButton voltar, simularResultado;
-	protected String simulacao;
+	JLabel titulo = new JLabel("",JLabel.CENTER);
+	JPanel topoPagina = new JPanel(); 
+	JPanel botoes = new JPanel();
+	JButton voltar = new JButton();
+	JButton simularResultado = new JButton();
 	
-	public Simulacao(JFrame janela) throws IOException{
-		super(janela);
-	}
 
 	
-	public void preparaSimulacao(String simulacao) {
-		contentPane.setLayout(new BorderLayout(3,1));
+	public default JPanel preparaSimulacao(String simulacao, Tela tela) {
+		//Nessa organização inicial, o content pane é dividido em 3 partes.
+		tela.getContentPane().setLayout(new BorderLayout(3,1));
 		
-		botoes = new JPanel(new FlowLayout());
-		simulacaoPane = new JPanel();
+		//1a parte = titulo
+		titulo.setText(simulacao);
+		titulo.setFont(new Font(Tela.FONTE, Font.PLAIN, Tela.TAMANHO_SUBTITULO));
+		tela.getContentPane().add(titulo, BorderLayout.NORTH);
 		
-		titulo = new JLabel(simulacao, JLabel.CENTER);
-		titulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));
+		//2a parte = painel das simulações, que será preenchido somente na
+		//classe da simulação especifica, nele que ocorre toda a simulação
+		JPanel simulacaoPane = new JPanel();
+		tela.getContentPane().add(simulacaoPane, BorderLayout.CENTER);
 		
-		voltar = new JButton("Voltar ao Menu Principal");
-		voltar.setFont(new Font(FONTE, Font.BOLD, TAMANHO_TEXTO));
+		//3a parte = botões para voltar ao menu e para realizar a simulação
+		botoes.setLayout(new FlowLayout());
+		
+		voltar.setText("Voltar ao Menu Principal");
+		voltar.setFont(new Font(Tela.FONTE, Font.BOLD, Tela.TAMANHO_TEXTO));
 		voltar.setPreferredSize(new Dimension(250, 25));
 		
-		voltar.setActionCommand(MENU);
-		voltar.addActionListener(new MudarTela(janela));
+		//OBS.:O ActionListenner de voltar eh feito pela classe MudarTela, enquanto
+		//o do botão simular resultado só é definido na classe da simulação a qual
+		//ele pertence.
+		voltar.setActionCommand(Tela.MENU);
+		voltar.addActionListener(new MudarTela(tela.getJanela()));
 		
-		simularResultado = new JButton("Simular Resultado");
-		simularResultado.setFont(new Font(FONTE, Font.BOLD, TAMANHO_TEXTO));
+		simularResultado.setText("Simular Resultado");
+		simularResultado.setFont(new Font(Tela.FONTE, Font.BOLD, Tela.TAMANHO_TEXTO));
 		simularResultado.setPreferredSize(new Dimension(250, 25));
 		
 		botoes.add(voltar);
 		botoes.add(simularResultado);
 		
-
+		tela.getContentPane().add(botoes, BorderLayout.SOUTH);
 		
-		contentPane.add(titulo, BorderLayout.NORTH);
-		contentPane.add(simulacaoPane, BorderLayout.CENTER);
-		contentPane.add(botoes, BorderLayout.SOUTH);
+		//O método retorna a SimulacaoPane que será preenchida na simulação que esse
+		//método é chamado
+		return simulacaoPane;
+	}
+	
+	public default void mostrarTela(Tela tela) {
+		//Método para a visibilidade da tela
+		tela.getJanela().setVisible(true);
+		tela.getContentPane().setVisible(true);
+
 	}
 }
