@@ -7,8 +7,9 @@ A aplicação realiza calculos e apresenta gráficos para simular o fluxo de pot
 fundamental e a distorção harmonica.
 
 
-Para executar o programa, após o download abra a pasta ep2 no terminal e execute
-os seguintes comandos:
+Para executar o programa, após o download abra o projeto no eclipse e execute a 
+Main.java dentro do pacote view ou abra a pasta ep2 no terminal e execute os 
+seguintes comandos:
 
 * Linux:
 
@@ -16,7 +17,6 @@ os seguintes comandos:
     javac view/Main.java  
     java view/Main  
 
-Ou abra o projeto no eclipse e execute a Main.java dentro do pacote view.
 
 ## Menu Inicial
 
@@ -37,3 +37,22 @@ verde a potência reativa e em azul o vetor resultante S.
 O usuário poderá escolher também somente visualizar o gráfico de tensão ou de corrente.
 Para isso, abaixo do campo do angulo de fase tem o botão "Simular Forma de Onda".
 
+## Simular Distorção Harmonica
+
+Ao escolher esta simulação o usuário deverá colocar os valores de amplitude e angulo
+da componente fundamental, escolher a quantidade de harmonicos e definir a paridade
+e em seguida apertar o botão "OK", com isso, aparecerá uma lista de harmônicos, onde
+devem ser preenchidos todos os valores de amplitude, angulo e ordem harmonica para, 
+em seguida, apertar o botão "Simular Resultado". Aparecerá então todos os gráficos 
+de onda e a equação da série de Fourier.  
+
+Pode-se também simular apenas a forma de onda da componente fundamental, clicando
+no botão "Simular Forma de Onda".
+
+## Observações:
+
+Os valores da amplitude da corrente na simulação do fluxo de potência fundamental
+deverá ser entre -100 e +100. Todas as outras amplitudes devem estar entre -220 e
++220. Os angulos devem ser entre -180° e + 180°.  
+
+O programa Aprenda QEE foi construido com o auxilio da IDE eclipse
