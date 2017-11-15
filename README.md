@@ -1,3 +1,6 @@
+NOME: Gabriela Barrozo Guedes  
+MATRÍCULA: 16/0121612  
+
 # Aprenda QEE
 
 O programa Aprenda QEE é o resultado de um trabalho da disciplina de Orientação a
@@ -56,6 +59,3 @@ deverá ser entre -100 e +100. Todas as outras amplitudes devem estar entre -220
 +220. Os angulos devem ser entre -180° e + 180°.  
 
 O programa Aprenda QEE foi construído com o auxílio da IDE eclipse.  
-
-NOME: Gabriela Barrozo Guedes  
-MATRÍCULA: 16/0121612
