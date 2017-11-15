@@ -55,4 +55,7 @@ Os valores da amplitude da corrente na simulação do fluxo de potência fundame
 deverá ser entre -100 e +100. Todas as outras amplitudes devem estar entre -220 e
 +220. Os angulos devem ser entre -180° e + 180°.  
 
-O programa Aprenda QEE foi construido com o auxilio da IDE eclipse
+O programa Aprenda QEE foi construido com o auxilio da IDE eclipse.  
+
+NOME: Gabriela Barrozo Guedes  
+MATRÍCULA: 16/0121612
