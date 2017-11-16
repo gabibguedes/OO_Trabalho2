@@ -10,15 +10,21 @@ import org.junit.jupiter.api.Test;
 import model.FluxoDePotenciaFundamental;
 
 class FluxoDePotenciaFundamentalTeste {
+
+	//Essa classe faz os testes dos calculos do fator de potencia fundamental
+	//usados na simulação 1
+	
 	double amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente;
 	double potAtiva, potReativa,potAparente, fatPotencia; 
 	FluxoDePotenciaFundamental calculo;
 	List <Double> pontosTensao, pontosCorrente, pontosOnda;
 	
+	//Antes de tudo, é feita a preparação para os calculos
 	@BeforeEach
 	public void beforeTests(){
 		double ponto;
 		
+		//Os valores para todas as variaveis são estabelecidos
 		amplitudeTensao = 220f;
 		anguloTensao = 0f;
 		amplitudeCorrente = 39f;
@@ -29,27 +35,37 @@ class FluxoDePotenciaFundamentalTeste {
 		potAparente = 8580f;
 		fatPotencia = 0.82f;
 		
-		calculo = new FluxoDePotenciaFundamental(amplitudeTensao, amplitudeCorrente, anguloTensao, anguloCorrente);
+		//A classe a ser testada é instanciada
+		calculo = new FluxoDePotenciaFundamental(amplitudeTensao,
+				amplitudeCorrente, anguloTensao, anguloCorrente);
 		
+		//As listas são criadas e preenchidas corretamnete
 		pontosTensao = new ArrayList<>();
 		pontosCorrente = new ArrayList<>();
 		pontosOnda = new ArrayList<>();
 
 		for(double t = 0; t< 200; t++) {
-			ponto = amplitudeTensao * Math.cos(Math.toRadians((calculo.FREQANGULAR * t) + anguloTensao));
+			ponto = amplitudeTensao * Math.cos(Math.toRadians((
+					calculo.FREQANGULAR * t) + anguloTensao));
 			pontosTensao.add(ponto);
 		}
 		
 		for(double t = 0; t< 200; t++) {
-			ponto = amplitudeCorrente * Math.cos(Math.toRadians((calculo.FREQANGULAR * t) + anguloCorrente));
+			ponto = amplitudeCorrente * Math.cos(Math.toRadians(
+					(calculo.FREQANGULAR * t) + anguloCorrente));
 			pontosCorrente.add(ponto);
 		}
 		
 		for(double t = 0; t<100; t++) {
-			ponto = (amplitudeTensao * Math.cos(Math.toRadians((calculo.FREQANGULAR * t) + anguloTensao))) * (amplitudeCorrente * Math.cos(Math.toRadians((calculo.FREQANGULAR * t) + anguloCorrente)));
+			ponto = (amplitudeTensao * Math.cos(Math.toRadians((
+					calculo.FREQANGULAR * t) + anguloTensao))) * 
+					(amplitudeCorrente * Math.cos(Math.toRadians((
+							calculo.FREQANGULAR * t) + anguloCorrente)));
 			pontosOnda.add(ponto);
 		}
 	}
+	
+	//Os metodos da classe são testados
 	
 	@Test
 	void testCalcularPotenciaAtiva() {		
@@ -118,7 +134,8 @@ class FluxoDePotenciaFundamentalTeste {
 	
 	@Test
 	void testFatPotenciaAngulosIguais() {
-		FluxoDePotenciaFundamental teste = new FluxoDePotenciaFundamental(amplitudeTensao, amplitudeCorrente, 4, 4);
+		FluxoDePotenciaFundamental teste = new FluxoDePotenciaFundamental(amplitudeTensao,
+				amplitudeCorrente, 4, 4);
 		assertEquals(1, teste.calcularFatPotencia());
 	}
 
