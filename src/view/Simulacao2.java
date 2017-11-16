@@ -33,7 +33,7 @@ public class Simulacao2 extends Tela implements Simulacao{
 	public JPanel simulacaoPane;
 	private Bloco compFund;
 	private Harmonicos harmonicos;
-	private Resultado resultado;
+	private ResultadoDistHarm resultado;
 	private boolean ehPar = true;
 	
 	public Simulacao2(JFrame janela) throws IOException {
@@ -57,7 +57,7 @@ public class Simulacao2 extends Tela implements Simulacao{
 		simulacaoPane.add(harmonicos, BorderLayout.CENTER);
 		
 		//3a parte = Resultado
-		resultado = new Resultado();
+		resultado = new ResultadoDistHarm();
 		simulacaoPane.add(resultado, BorderLayout.SOUTH);
 		
 		//ActionListener do botão simular resultado instanciado pela
@@ -66,19 +66,34 @@ public class Simulacao2 extends Tela implements Simulacao{
 		simularResultado.addActionListener(new AcoesSimulacao2(this));		
 	}
 	
+	public Harmonicos getHarmonicos() {
+		return harmonicos;
+	}
+	public Bloco getComponenteFundamental() {
+		return compFund;
+	}
+	public GraphPanel getGraficoResultante() {
+		return resultado.getGrafico();
+	}
+	public void setEhPar(boolean ehPar) {
+		this.ehPar = ehPar;
+	}
+	public boolean  getEhPar() {
+		return ehPar;
+	}
+	public JLabel getFormula() {
+		return resultado.getFormula();
+	}
+	
 	public class Harmonicos extends JPanel{
 		//Essa classe organiza e instancia o JPanel onde se encontram os
 		//Harmonicos
 		
-		Simulacao2 simulacao;
-
-		private JPanel configuraHarmonicos;
+		private Simulacao2 simulacao;
 		private JScrollPane  blocosHarmonicos;
-		private JLabel titulo, numOH, parImpar;
-		private JPanel numOHpanel, paridadePanel, imputsUsuario, imputsNumOH, imputsParImpar;
 		private JSpinner numOHTxt;
 		private JRadioButton par, impar;
-		private JButton enter;
+		
 		private List<Bloco> listaHarmonicos;
 		
 		private Harmonicos(Simulacao2 simulacao){
@@ -88,6 +103,10 @@ public class Simulacao2 extends Tela implements Simulacao{
 		}
 		
 		private void preparaHarmonicos() {
+			JPanel configuraHarmonicos;
+			JLabel titulo, numOH, parImpar;
+			JPanel numOHpanel, paridadePanel, imputsUsuario, imputsNumOH, imputsParImpar;
+			JButton enter;
 			//O JPanel é dividido em dois, onde ao norte estarão as configurações dos 
 			//harmonicos e ao centro a lista dos mesmos com a utilização do JScrollPane
 			
@@ -197,32 +216,16 @@ public class Simulacao2 extends Tela implements Simulacao{
 		}
 	}
 	
-	public Harmonicos getHarmonicos() {
-		return harmonicos;
-	}
-	public Bloco getComponenteFundamental() {
-		return compFund;
-	}
-	public GraphPanel getGraficoResultante() {
-		return resultado.getGrafico();
-	}
-	public void setEhPar(boolean ehPar) {
-		this.ehPar = ehPar;
-	}
-	public boolean  getEhPar() {
-		return ehPar;
-	}
-	public JLabel getFormula() {
-		return resultado.getFormula();
-	}
+
 	
-	public class Resultado extends JPanel{
+	public class ResultadoDistHarm extends JPanel{
 		//Esta classe instancia o JPanel do resultado desta simulação.
 		
-		private JLabel titulo, onda, formula, tituloFormula;;
+		private JLabel formula;
 		private GraphPanel grafico;
 		private JPanel formulaPanel, graficoPanel, resultados;
-		public Resultado() {
+		
+		public ResultadoDistHarm() {
 			//Neste painel teremos inicialmente 2 partes, o titulo e o panel 
 			//onde os resultados são aprensentados
 			setLayout(new BorderLayout());
@@ -242,6 +245,8 @@ public class Simulacao2 extends Tela implements Simulacao{
 		}
 		
 		public void mostrarResultado() {
+			JLabel titulo, onda, tituloFormula;
+			
 			//titulo do painel da classe
 			titulo = new JLabel("Resultado:");
 			titulo.setFont(new Font(FONTE, Font.PLAIN, TAMANHO_SUBTITULO));

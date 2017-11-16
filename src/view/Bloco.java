@@ -37,19 +37,15 @@ public class Bloco extends JPanel{
 	//-Na simulação 2:
 	//	-Painel para Componente Fundamental;
 	//	-Painel para Harmonicos;
-	
-	private JLabel tituloBloco, amplitude, angulo, ordemHLb, tituloGrafico;
+
+	private String titulo, simboloAmplitude;
 	private JTextField amplitudeTxt, anguloTxt;
 	private JSpinner ordemHTxt;
-	private JPanel imputUsuario, imputsAmp, imputsAng, imputsOrdemH, resposta, graficoPane;
-	private String titulo, simboloAmplitude;
-	private JButton simular;
-	private GraphPanel grafico;
-	private Simulacao1 simulacao1;
-	private Simulacao2 simulacao2;
-	private List<Double> pontos;
-	private String tipo;
 	private boolean ehHarmonico = false, ehPar;
+	private GraphPanel grafico;
+	private Simulacao2 simulacao2;
+	private Simulacao1 simulacao1;
+	private String tipo;
 	
 	public Bloco(String titulo, Simulacao1 simulacao){
 		//Construtor para um bloco da simulação 1
@@ -82,6 +78,11 @@ public class Bloco extends JPanel{
 	}
 	
 	public void preparaGUI() {
+		JLabel tituloBloco, amplitude, angulo, ordemHLb, tituloGrafico;
+		JButton simular;
+		List<Double> pontos;
+		JPanel imputUsuario, imputsAmp, imputsAng, imputsOrdemH, resposta, graficoPane;
+		
 		//O painel é dividido em tres, onde ao topo está o titulo
 		//a esquerda os imputs do usuario e no centro está o gráfico
 		

@@ -69,23 +69,33 @@ public class Simulacao1 extends Tela implements Simulacao{
 		simularResultado.addActionListener(new AcoesSimulacao1(this));		
 	}
 	
+	public Bloco getBlocoTensao() {
+		return tensao;
+	}
+	public Bloco getBlocoCorrente() {
+		return corrente;
+	}
+	public ResultadoPotencia getResultadoPotencia() {
+		return resultado;
+	}
 
 	
 	public class ResultadoPotencia extends JPanel{
 		//Nessa classe foi organizado o painel do resultado desta simulação
 		
-		private JLabel tituloResultado, potAtiva, potReativa, potAparente, fatPotencia, potGrafico, potTriangulo;
 		private JLabel potAtivaValor, potReativaValor, potAparenteValor, fatPotenciaValor;
-		private JPanel painel, valores, graficos;
 		private GraphPanel grafico;
-		Triangulo triangulo;
-		private List<Double> pontos;
+		private Triangulo triangulo;
 
 		private ResultadoPotencia() {
 			preparaGUI();
 		}
 		
 		private void preparaGUI() {
+			JLabel tituloResultado, potAtiva, potReativa, potAparente, fatPotencia, potGrafico, potTriangulo;
+			JPanel painel, valores, graficos;
+			List<Double> pontos;
+			
 			//Primeitamente foi feito um BorderLayout, onde será utilizado
 			//2 partes, norte e centro
 			setLayout(new BorderLayout());
@@ -206,16 +216,4 @@ public class Simulacao1 extends Tela implements Simulacao{
 			return triangulo;
 		}
 	}
-	
-	public Bloco getBlocoTensao() {
-		return tensao;
-	}
-	public Bloco getBlocoCorrente() {
-		return corrente;
-	}
-	public ResultadoPotencia getResultadoPotencia() {
-		return resultado;
-	}
-
-
 }
