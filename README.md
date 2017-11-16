@@ -9,9 +9,10 @@ de Qualidade de Energia Elétrica ao trazer simulações dos conteúdos dados em
 A aplicação realiza calculos e apresenta gráficos para simular o fluxo de potência
 fundamental e a distorção harmonica.  
 
-Para executar o programa, após o download, abra o projeto no eclipse e execute a 
-aplicação a partir da classe Main.java dentro do pacote view ou abra a pasta ep2
-no terminal e execute os seguintes comandos:  
+Para executar o programa, após o download, abra o projeto no eclipse, entre no 
+pacote view dentro da pasta src, encontre a classe Main.java, clique nela com o 
+botão direito e selecione "run as" e "java aplication". Outra forma é abrir a pasta
+ep2 no terminal e executar os seguintes comandos:  
 
 * Linux:
 
@@ -57,5 +58,8 @@ no botão "Simular Forma de Onda".
 Os valores da amplitude da corrente na simulação do fluxo de potência fundamental
 deverá ser entre -100 e +100. Todas as outras amplitudes devem estar entre -220 e
 +220. Os angulos devem ser entre -180° e + 180°.  
+
+A imagem do diagrama de classe se encontra na pasta doc. O diagrama foi feito com 
+o plugin AmaterasUML 1.3.4, assim foi gerado o arquivo .cld que deu origem a imagem.  
 
 O programa Aprenda QEE foi construído com o auxílio da IDE eclipse.  
